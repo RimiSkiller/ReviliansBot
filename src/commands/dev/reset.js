@@ -15,10 +15,10 @@ module.exports = {
 			check: true,
 			channel: interaction.channelId,
 		}).save();
-		client.guilds.cache.forEach(gs => {
-			gs.fetch().then(g => g.commands.fetch().then(cs => cs.forEach(c => c.delete())));
+		client.guilds.cache.forEach(async gs => {
+			await gs.fetch().then(async g => await g.commands.fetch().then(cs => cs.forEach(async c => await c.delete())));
 		});
-		client.application.commands.cache.forEach(c => c.delete());
+		client.application.commands.cache.forEach(async c => await c.delete());
 		process.abort();
 	},
 };

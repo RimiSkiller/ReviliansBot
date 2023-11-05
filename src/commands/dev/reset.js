@@ -8,17 +8,21 @@ module.exports = {
 
 	/**
 	 * @param {import('discord.js').Client} client
-	 * @param {import('discord.js').Interaction} interaction
+	 * @param {import('discord.js').CommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		await new Level({
-			check: true,
-			channel: interaction.channelId,
-		}).save();
 		client.guilds.cache.forEach(async gs => {
 			await gs.fetch().then(async g => await g.commands.fetch().then(cs => cs.forEach(async c => await c.delete())));
 		});
 		client.application.commands.cache.forEach(async c => await c.delete());
-		process.abort();
+		const msg = await (await interaction.reply('**🔄️ - Restarting in 10 seconds...**')).fetch();
+		await new Level({
+			reply: msg.id,
+			channel: interaction.channelId,
+		}).save();
+		setTimeout(async () => {
+			await interaction.editReply('**🔄️ - Restarting now...**');
+			process.abort();
+		}, 10000);
 	},
 };

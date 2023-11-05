@@ -1,8 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const resetSchema = new Schema({
-	check: {
-		type: Boolean,
+	reply: {
+		type: String,
 		required: true,
 	},
 	channel: {

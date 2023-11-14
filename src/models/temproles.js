@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
-const mutesSchema = new Schema({
-	staff: {
+const tRolesSchema = new Schema({
+	role: {
 		type: String,
 		required: true,
 	},
@@ -9,10 +9,10 @@ const mutesSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	embed: {
-		type: Object,
+	time: {
+		type: String,
 		required: true,
 	},
 });
 
-module.exports = model('mute', mutesSchema);
+module.exports = model('temprole', tRolesSchema);

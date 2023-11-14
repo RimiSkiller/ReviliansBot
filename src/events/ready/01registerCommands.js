@@ -43,7 +43,7 @@ module.exports = async (client) => {
 				if (!name || !description) continue;
 				if (localCommand.deleted) {
 					console.log(
-						`⏩ - Skipped  "${name}" (delete).`,
+						`⏩ - Skipped  "${name}" (deleted).`,
 					);
 					continue;
 				}

@@ -1,4 +1,4 @@
-const { devs } = require('../../../config.json');
+const { dev } = require('../../../config.json');
 const getLocalCommands = require('../../utils/getLocalCommands');
 
 module.exports = async (client, interaction) => {
@@ -14,7 +14,7 @@ module.exports = async (client, interaction) => {
 		if (!commandObject) return;
 
 		if (commandObject.devOnly) {
-			if (!devs.includes(interaction.member.id)) {
+			if (dev != interaction.user.id) {
 				interaction.reply({
 					content: '**❌ - Only developers are allowed to run this command.**',
 					ephemeral: true,

@@ -2,12 +2,12 @@ const { ApplicationCommandOptionType, PermissionFlagsBits, ButtonBuilder, Button
 const Mutes = require('../../models/mutes');
 
 module.exports = {
-	name: 'log',
-	description: 'Get the history of mod actions on a member',
+	name: 'staff',
+	description: 'Get the history of a staff mod actions on all members',
 	options: [
 		{
-			name: 'member',
-			description: 'The member to get his history.',
+			name: 'staff',
+			description: 'The staff to get his history.',
 			required: true,
 			type: ApplicationCommandOptionType.Mentionable,
 		},
@@ -19,8 +19,8 @@ module.exports = {
 	 * @param {import('discord.js').CommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		const user = interaction.options.get('member').value;
-		if (!await (interaction.client.users.fetch(user).catch(() => null))) interaction.editReply('**❌ - Invalid id, try again with a valid id.**');
+		const user = interaction.options.get('staff').value;
+		if (!await (client.users.fetch(user).catch(() => null))) interaction.editReply('**❌ - Invalid id, try again with a valid id.**');
 		const button_b = new ButtonBuilder()
 			.setCustomId('backward')
 			.setEmoji('1170430004493033594')
@@ -30,8 +30,8 @@ module.exports = {
 			.setEmoji('1170430025208696853')
 			.setStyle(ButtonStyle.Primary);
 
-		const data = await Mutes.where('member').equals(user);
-		if (!data || data.length == 0) return interaction.reply('**⁉️ - No history was found for this member.**');
+		const data = await Mutes.where('staff').equals(user);
+		if (!data || data.length == 0) return interaction.reply('**⁉️ - No history was found for this staff.**');
 		let index = data.length - 1;
 		const button_i = new ButtonBuilder()
 			.setCustomId('index')

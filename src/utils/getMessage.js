@@ -2,15 +2,16 @@
  * @param {import('discord.js').Interaction} interaction
  * @returns string
  */
-module.exports = async (interaction) => {
+module.exports = async (interaction, channel = interaction.channel, time = 30000) => {
 	let msg = String();
-	await interaction.channel.awaitMessages({ filter: m => m.member.id == interaction.member.id, max: 1, time: 30000, errors: ['time'] })
+	await channel.awaitMessages({ filter: m => m.member.id == interaction.member.id, max: 1, time: time, errors: ['time'] })
 		.then(collected => {
-			msg = collected.first().content || collected.first().attachments.first().url;
+			if (collected.first().attachments.first()) msg = collected.first().attachments.first().url;
+			else msg = collected.first().content;
 			collected.first().delete();
 		})
 		.catch(() => {
-			msg = 'no-res-1';
+			msg = 'no-res';
 		});
 	return msg;
 };

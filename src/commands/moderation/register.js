@@ -19,9 +19,10 @@ const select = new StringSelectMenuBuilder()
 const row = new ActionRowBuilder().addComponents(select);
 
 module.exports = {
+	deleted: true,
 	name: 'register',
 	description: 'register a moderation action',
-	testOnly: true,
+	testOnly: false,
 	/**
 	 * @param {import('discord.js').Client} client
 	 * @param {import('discord.js').CommandInteraction} interaction
@@ -31,7 +32,7 @@ module.exports = {
 		const res = await require('../../utils/getMenu')(reply);
 		if (res == 'mute') await require('./Register Methods/mute')(interaction);
 		if (res == 'ban') await require('./Register Methods/ban')(interaction);
-		else if (res == 'no-res-2') interaction.editReply({ content: 'Aborted', components: [] });
+		else if (res == 'no-res') interaction.editReply({ content: 'Aborted', components: [] });
 		else console.log(res);
 	},
 };

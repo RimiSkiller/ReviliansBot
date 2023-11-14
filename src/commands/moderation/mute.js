@@ -65,6 +65,7 @@ module.exports = {
 			if (!dm) await interaction.reply(msg.replace('You', targetUser));
 			else interaction.reply({ content: msg.replace('You', targetUser), ephemeral: true });
 			client.channels.cache.get(log).send(`**● Action By ${interaction.user} :**\`\`\`diff\n- muted the user "${targetUser.user.username}" (${targetUser.id})\n- Reason: ${reason}\n- Time: ${pms(time, { verbose: true })}\`\`\``);
+			require('./Register Methods/mute')(interaction, { member: targetUser.id, time: pms(time, { verbose: true }), reason: reason });
 		}
 		catch (error) {
 			console.log(`There was an error when muting: ${error}`);

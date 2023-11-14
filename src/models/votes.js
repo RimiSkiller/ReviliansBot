@@ -1,18 +1,18 @@
 const { Schema, model } = require('mongoose');
 
-const mutesSchema = new Schema({
-	staff: {
+const voteSchema = new Schema({
+	message: {
 		type: String,
 		required: true,
 	},
-	member: {
+	channel: {
 		type: String,
 		required: true,
 	},
-	embed: {
-		type: Object,
+	time: {
+		type: String,
 		required: true,
 	},
 });
 
-module.exports = model('mute', mutesSchema);
+module.exports = model('Vote', voteSchema);

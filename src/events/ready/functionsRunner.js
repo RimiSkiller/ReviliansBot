@@ -1,3 +1,4 @@
+const wait = require('node:timers/promises').setTimeout;
 const getAllFiles = require('../../utils/getAllFiles');
 const path = require('path');
 const ms = require('ms');
@@ -11,6 +12,7 @@ module.exports = async (client) => {
 		const func = async () => {
 			for (const funcFile of funcFiles) await require(funcFile)(client);
 		};
+		await wait(5000);
 		func();
 		setInterval(func, ms(time));
 	}

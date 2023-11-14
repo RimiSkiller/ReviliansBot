@@ -12,7 +12,7 @@ module.exports = async (reply) => {
 			collected.deferUpdate();
 		})
 		.catch(() => {
-			msg = 'no-res-2';
+			msg = 'no-res';
 		});
 	return msg;
 };

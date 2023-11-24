@@ -12,7 +12,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.Mentionable,
 		},
 	],
-	permissionsRequired: [PermissionFlagsBits.ManageMessages],
+	permissions: PermissionFlagsBits.ManageMessages,
 
 	/**
 	 * @param {import('discord.js').Client} client

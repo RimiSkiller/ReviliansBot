@@ -1,7 +1,7 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
 const ms = require('ms');
 const TRoles = require('../../models/temproles');
-const { mainserver, log } = require('../../../config.json');
+const { mainserver, mainlog } = require('../../../config.json');
 
 module.exports = {
 	name: 'temprole',
@@ -37,15 +37,14 @@ module.exports = {
 			type: ApplicationCommandOptionType.String,
 		},
 	],
-	botPermissions: [PermissionFlagsBits.ManageRoles],
-	permissionsRequired: [PermissionFlagsBits.ManageRoles],
+	permissions: PermissionFlagsBits.ManageRoles,
 
 	/**
 	 * @param {import('discord.js').Client} client
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		const logger = (m) => client.channels.cache.get(log).send(m);
+		const logger = (m) => client.channels.cache.get(mainlog).send(m);
 		const user = await client.guilds.cache.get(mainserver).members.fetch(interaction.options.get('member').value).catch(() => null);
 		if (!user) return interaction.reply({ content: '**❌ - This Member isn\'t in the server.**', ephemeral: true });
 

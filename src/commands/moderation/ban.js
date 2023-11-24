@@ -4,7 +4,7 @@ const {
 } = require('discord.js');
 const ms = require('ms');
 const Ban = require('../../models/activeBan');
-const { log } = require('../../../config.json');
+const { mainlog } = require('../../../config.json');
 
 module.exports = {
 	name: 'ban',
@@ -32,8 +32,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.Boolean,
 		},
 	],
-	permissionsRequired: [PermissionFlagsBits.BanMembers],
-	botPermissions: [PermissionFlagsBits.BanMembers],
+	permissions: PermissionFlagsBits.BanMembers,
 
 	/**
 	 * @param {import('discord.js').Client} client
@@ -81,7 +80,7 @@ module.exports = {
 			interaction.guild.bans.create(targetUser.id, { reason: `${reason} | ${time == 'no-time' ? 'Eternity' : pms(time, { verbose: true })}` }).then(async () => {
 				if (!dm) await interaction.reply(msg.replace('You', targetUser));
 				else interaction.reply({ content: msg.replace('You', targetUser), ephemeral: true });
-				client.channels.cache.get(log).send(`**● Action By ${interaction.user} :**\`\`\`diff\n-  the user "${targetUser.username}" (${targetUser.id})\n- Reason: ${reason}\n- Time: ${time == 'no-time' ? 'Eternity' : pms(time, { verbose: true })}\`\`\``);
+				client.channels.cache.get(mainlog).send(`**● Action By ${interaction.user} :**\`\`\`diff\n-  the user "${targetUser.username}" (${targetUser.id})\n- Reason: ${reason}\n- Time: ${time == 'no-time' ? 'Eternity' : pms(time, { verbose: true })}\`\`\``);
 			});
 		}
 

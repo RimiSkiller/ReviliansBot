@@ -1,4 +1,5 @@
-const Level = require('../../models/reset');
+const { REST, Routes } = require('discord.js');
+const Reset = require('../../models/reset');
 
 module.exports = {
 	name: 'reset',
@@ -11,18 +12,20 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		await client.guilds.cache.forEach(async gs => {
-			await gs.fetch().then(async g => await g.commands.fetch().then(cs => cs.forEach(async c => await c.delete())));
+		const rest = new REST().setToken(process.env.TOKEN);
+		await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: [] })
+			.then(() => console.log('Successfully deleted all application commands.'))
+			.catch(console.error);
+		client.guilds.cache.forEach(async g => {
+			await rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, g.id), { body: [] })
+				.catch(console.error);
 		});
-		(await client.application.commands.fetch()).forEach(async c => await c.delete());
-		const msg = await (await interaction.reply('**🔄️ - Restarting in 5 seconds...**')).fetch();
-		await new Level({
+		await interaction.reply('**🔄️ - Restarting now...**');
+		const msg = await interaction.fetchReply();
+		await new Reset({
 			reply: msg.id,
 			channel: interaction.channelId,
 		}).save();
-		setTimeout(async () => {
-			await interaction.editReply('**🔄️ - Restarting now...**');
-			process.abort();
-		}, 5000);
+		process.abort();
 	},
 };

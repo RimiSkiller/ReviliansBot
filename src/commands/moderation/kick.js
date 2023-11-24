@@ -21,8 +21,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.Boolean,
 		},
 	],
-	botPermissions: [PermissionFlagsBits.KickMembers],
-	permissionsRequired: [PermissionFlagsBits.KickMembers],
+	permissions: PermissionFlagsBits.KickMembers,
 
 	/**
 	 * @param {import('discord.js').Client} client

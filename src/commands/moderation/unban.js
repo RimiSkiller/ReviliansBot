@@ -3,7 +3,7 @@ const {
 	PermissionFlagsBits,
 } = require('discord.js');
 const Ban = require('../../models/activeBan');
-const { log } = require('../../../config.json');
+const { mainlog } = require('../../../config.json');
 
 module.exports = {
 	name: 'unban',
@@ -16,8 +16,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.Mentionable,
 		},
 	],
-	permissionsRequired: [PermissionFlagsBits.BanMembers],
-	botPermissions: [PermissionFlagsBits.BanMembers],
+	permissions: PermissionFlagsBits.BanMembers,
 
 	/**
 	 * @param {import('discord.js').Client} client
@@ -31,6 +30,6 @@ module.exports = {
 		if (ban) ban.deleteOne();
 		interaction.guild.bans.remove(targetUser.id);
 		interaction.reply(`**✅ - Removed the ban from "${targetUser.displayName}".**`);
-		client.channels.cache.get(log).send(`**● Action By ${interaction.user} :**\`\`\`diff\n+ Removed the ban from user "${targetUser.username}" (${targetUser.id})\`\`\``);
+		client.channels.cache.get(mainlog).send(`**● Action By ${interaction.user} :**\`\`\`diff\n+ Removed the ban from user "${targetUser.username}" (${targetUser.id})\`\`\``);
 	},
 };

@@ -1,14 +1,14 @@
 const { testServer } = require('../../../config.json');
 const areCommandsDifferent = require('../../utils/areCommandsDifferent');
 const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalCommands');
+const getLocalCommands = require('../../utils/getLocalInteractions');
 
 /**
  * @param {import('discord.js').Client} client
  */
 module.exports = async (client) => {
 	try {
-		const localCommands = getLocalCommands();
+		const localCommands = getLocalCommands('commands');
 		const applicationCommands = await getApplicationCommands(
 			client,
 		);
@@ -19,14 +19,14 @@ module.exports = async (client) => {
 		});
 
 		for (const localCommand of localCommands) {
-			const { name, description, options } = localCommand;
+			const { name, description, options, permissions } = localCommand;
 
 			const existingCommand = applicationCommands.cache.find((cmd) => cmd.name === name);
 
 			if (existingCommand) {
 				if (localCommand.deleted) {
 					await applicationCommands.delete(existingCommand.id);
-					console.log(`🗑 Deleted command "${name}".`);
+					console.log(`🗑 - Deleted command "${name}".`);
 					continue;
 				}
 
@@ -36,7 +36,7 @@ module.exports = async (client) => {
 						options,
 					});
 
-					console.log(`🔁 Edited command "${name}".`);
+					console.log(`🔁 - Edited command "${name}".`);
 				}
 			}
 			else {
@@ -55,12 +55,23 @@ module.exports = async (client) => {
 					continue;
 				}
 
-				await applicationCommands.create({
-					name,
-					description,
-					options,
-				});
-
+				if (!permissions) {
+					await applicationCommands.create({
+						name,
+						description,
+						options,
+						dmPermission: false,
+					});
+				}
+				else {
+					await applicationCommands.create({
+						name,
+						description,
+						options,
+						dmPermission: false,
+						defaultMemberPermissions: permissions,
+					});
+				}
 				console.log(`👍 Registered command "${name}."`);
 			}
 		}

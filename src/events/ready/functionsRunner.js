@@ -12,7 +12,7 @@ module.exports = async (client) => {
 		const func = async () => {
 			for (const funcFile of funcFiles) await require(funcFile)(client);
 		};
-		await wait(5000);
+		await wait(2000);
 		func();
 		setInterval(func, ms(time));
 	}

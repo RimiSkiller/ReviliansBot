@@ -1,5 +1,5 @@
-const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
-const { dev, goods, log } = require('../../../config.json');
+const { ApplicationCommandOptionType } = require('discord.js');
+const { dev, goods, mainlog } = require('../../../config.json');
 const ms = require('ms');
 const TRoles = require('../../models/temproles');
 
@@ -15,7 +15,6 @@ module.exports = {
 			choices: goods.map(m => m = { name: `${m.name}: $${m.price} credites.`, value: m.value }),
 		},
 	],
-	botPermissions: [PermissionFlagsBits.ManageRoles],
 
 	/**
 	 * @param {import('discord.js').Client} client
@@ -23,7 +22,7 @@ module.exports = {
 	 */
 	callback: async (client, interaction) => {
 		const { default: pms } = await import('pretty-ms');
-		const logger = (m) => client.channels.cache.get(log).send(m);
+		const logger = (m) => client.channels.cache.get(mainlog).send(m);
 		const choise = interaction.options.get('service').value;
 		const role = goods[Number(choise)];
 

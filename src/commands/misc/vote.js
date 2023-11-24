@@ -19,7 +19,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.String,
 		},
 	],
-	permissionsRequired: [PermissionFlagsBits.ManageChannels],
+	permissions: PermissionFlagsBits.ManageChannels,
 
 	/**
 	 * @param {import('discord.js').Client} client
@@ -38,6 +38,7 @@ module.exports = {
 		await msg.react('1173758586816561235');
 		if (!time) return;
 		await new Votes({
+			author: interaction.user.id,
 			message: msg.id,
 			channel: interaction.channelId,
 			time: Date.now() + time || 'no-time',

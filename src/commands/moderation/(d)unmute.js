@@ -1,7 +1,8 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
-const { log } = require('../../../config.json');
+const { mainlog } = require('../../../config.json');
 
 module.exports = {
+	deleted: true,
 	name: 'unmute',
 	description: 'Unmute a member.',
 	options: [
@@ -17,8 +18,7 @@ module.exports = {
 			type: ApplicationCommandOptionType.Boolean,
 		},
 	],
-	botPermissions: [PermissionFlagsBits.ModerateMembers],
-	permissionsRequired: [PermissionFlagsBits.ModerateMembers],
+	permissions: PermissionFlagsBits.ModerateMembers,
 
 	/**
 	 * @param {import('discord.js').Client} client
@@ -46,7 +46,7 @@ module.exports = {
 			await targetUser.timeout(null);
 			if (!dm) await interaction.reply(msg.replace('You', targetUser));
 			else interaction.reply({ content: msg.replace('You', targetUser), ephemeral: true });
-			client.channels.cache.get(log).send(`**● Action By ${interaction.user} :**\`\`\`diff\n+ Unmuted the user "${targetUser.user.username}" (${targetUser.id})\`\`\``);
+			client.channels.cache.get(mainlog).send(`**● Action By ${interaction.user} :**\`\`\`diff\n+ Unmuted the user "${targetUser.user.username}" (${targetUser.id})\`\`\``);
 		}
 		catch (error) {
 			console.log(`There was an error when unmuting: ${error}`);

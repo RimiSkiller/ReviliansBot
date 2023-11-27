@@ -19,8 +19,8 @@ module.exports = async (client) => {
 		.setColor(0x5865f2)
 		.setTimestamp(Date.now());
 	const messageShow = await channelShow.messages.fetch();
-	if (messageShow.size == 0) return channelShow.send({ embeds: [embed] });
-	messageShow.first().edit({ embeds: [embed] });
+	if (messageShow.size == 0) channelShow.send({ embeds: [embed] });
+	else messageShow.first().edit({ embeds: [embed] });
 	const messageManage = await channelManage.messages.fetch();
 	const button1 = new ButtonBuilder({ emoji: '➕', customId: 'staffUp', style: ButtonStyle.Success });
 	const button2 = new ButtonBuilder({ emoji: '➖', customId: 'staffDown', style: ButtonStyle.Success });
@@ -30,5 +30,6 @@ module.exports = async (client) => {
 	const menu = new UserSelectMenuBuilder()
 		.setCustomId('staffPointManage')
 		.setPlaceholder('Select a staff to manage his points');
-	messageManage.first().edit({ components: [new ActionRowBuilder().setComponents(menu), new ActionRowBuilder().setComponents(button1, set, button2)] });
+	if (messageManage.size == 0) channelManage.send({ components: [new ActionRowBuilder().setComponents(menu), new ActionRowBuilder().setComponents(button1, set, button2)] });
+	else messageManage.first().edit({ components: [new ActionRowBuilder().setComponents(menu), new ActionRowBuilder().setComponents(button1, set, button2)] });
 };

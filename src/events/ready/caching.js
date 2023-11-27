@@ -12,12 +12,14 @@ module.exports = async (client) => {
 	await client.channels.fetch(config.pointsChannel.show, { cache: true });
 	await client.channels.fetch(config.pointsChannel.manage, { cache: true });
 	await client.channels.fetch(config.pointsChannel.log, { cache: true });
-	await client.channels.fetch(config.checkIn, { cache: true });
+	await client.channels.fetch(config.checkIn.show, { cache: true });
+	await client.channels.fetch(config.checkIn.log, { cache: true });
 
-
+	// servers
+	client.mainServer = await client.guilds.fetch(config.mainserver);
+	client.staffServer = await client.guilds.fetch(config.testServer);
 	// roles
-	const server = await client.guilds.fetch(config.mainserver);
-	await server.roles.fetch(config.muteRole, { cache: true });
+	await client.mainServer.roles.fetch(config.muteRole, { cache: true });
 
 	// messages
 	const votes = await Votes.find();
@@ -25,4 +27,7 @@ module.exports = async (client) => {
 		const channel = await client.channels.fetch(vote.channel, { cache: false });
 		await channel.messages.fetch(vote.message, { cache: true });
 	});
+
+	// members
+	await client.staffServer.members.fetch({ cache: true });
 };

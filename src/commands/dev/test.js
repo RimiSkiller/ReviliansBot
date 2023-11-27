@@ -11,6 +11,6 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		client.channels.cache.get('1178482291916427366').send({ embeds: [new EmbedBuilder().setDescription('.')] });
+		require('../../utils/helpers/checkInMessage')(client);
 	},
 };

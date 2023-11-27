@@ -10,8 +10,11 @@ const client = new Client({
 		IntentsBitField.Flags.GuildMessages,
 		IntentsBitField.Flags.MessageContent,
 		IntentsBitField.Flags.GuildMessageReactions,
+		IntentsBitField.Flags.GuildPresences,
 	],
 });
+
+client.wait = require('node:timers/promises').setTimeout;
 
 (async () => {
 	try {

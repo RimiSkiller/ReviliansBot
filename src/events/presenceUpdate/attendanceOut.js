@@ -17,7 +17,7 @@ module.exports = async (client, oldPresence, newPresence) => {
 	const button = new ButtonBuilder({ customId: 'check-out', label: 'Check-Out', style: ButtonStyle.Danger });
 	const msg = await member.send({ content: '**⚠️ - You will be checked-out if you don\'t go back online in 5 minutes.**', components: [new ActionRowBuilder().addComponents(button)] });
 	await client.wait(300_000);
-	if (member.presence?.status == 'online' || !(await Checks.findOne({ staff: newPresence.userId })).online) return msg.delete();
+	if (member.presence?.status == 'online' || !(await Checks.findOne({ staff: newPresence.userId })).online) return msg.delete().catch(() => null);
 	check.online = false;
 	const period = Math.floor(Date.now() / 1000) - check.lastCheck - 300;
 	check.time += period;

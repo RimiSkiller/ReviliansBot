@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('@discordjs/builders');
-const make = require('../../utils/proofMaker');
+const make = require('../../utils/helpers/proofMaker');
 
 module.exports = {
 	name: 'test',

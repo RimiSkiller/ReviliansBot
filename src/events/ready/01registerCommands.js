@@ -1,14 +1,14 @@
 const { testServer } = require('../../../config.json');
-const areCommandsDifferent = require('../../utils/areCommandsDifferent');
-const getApplicationCommands = require('../../utils/getApplicationCommands');
-const getLocalCommands = require('../../utils/getLocalInteractions');
+const areCommandsDifferent = require('../../utils/others/areCommandsDifferent');
+const getApplicationCommands = require('../../utils/getFiles/getApplicationCommands');
+const getLocalCommands = require('../../utils/getFiles/getLocalInteractions');
 
 /**
  * @param {import('discord.js').Client} client
  */
 module.exports = async (client) => {
 	try {
-		const localCommands = getLocalCommands('commands');
+		const localCommands = getLocalCommands('../commands');
 		const applicationCommands = await getApplicationCommands(
 			client,
 		);

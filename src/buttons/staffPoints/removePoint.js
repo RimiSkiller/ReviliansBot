@@ -18,6 +18,6 @@ module.exports = {
 		interaction.message.edit({ content: `**<@${user.id}><:arrow:1170430004493033594>__${data ? data.points : 'No data'}__**` });
 		interaction.deferUpdate();
 		client.channels.cache.get(log).send({ embeds: [new EmbedBuilder().setDescription(`- **<@${interaction.user.id}> removed a point from staff <@${user.id}>.**`).setColor(0xff0000)] });
-		require('../../utils/pointMessage')(client);
+		require('../../utils/helpers/pointMessage')(client);
 	},
 };

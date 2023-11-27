@@ -46,7 +46,7 @@ module.exports = {
 				if (index == 0) button_b.setDisabled(true);
 				if (index == data.length - 1) button_f.setDisabled(true);
 				const reply = await interaction.editReply({ embeds: [data[index].embed], components: [new ActionRowBuilder().addComponents(button_f, button_i, button_b)] });
-				res = await require('../../utils/getButton')(reply);
+				res = await require('../../utils/awaitInterraction/getButton')(reply);
 				if (res == 'backward') index--;
 				else if (res == 'forward') index++;
 				button_i.setLabel(`${data.length - index}/${data.length}`);

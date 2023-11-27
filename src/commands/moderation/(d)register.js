@@ -29,7 +29,7 @@ module.exports = {
 	 */
 	callback: async (client, interaction) => {
 		const reply = await interaction.reply({ content: '**● Choose an action to register it:**', components: [row], ephemeral: true });
-		const res = await require('../../utils/getMenu')(reply);
+		const res = await require('../../utils/awaitInterraction/getMenu')(reply);
 		if (res == 'mute') await require('./Register Methods/mute')(interaction);
 		if (res == 'ban') await require('./Register Methods/ban')(interaction);
 		else if (res == 'no-res') interaction.editReply({ content: 'Aborted', components: [] });

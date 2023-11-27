@@ -18,6 +18,6 @@ module.exports = {
 		client.channels.cache.get(log).send({ embeds: [new EmbedBuilder().setDescription(`- **Added a point for staff <@${user.id}> for registering a proof.**`).setColor(0x00ff00)] });
 		interaction.message.edit({ embeds: [embed], components: [], files: [] });
 		interaction.deferUpdate();
-		require('../../utils/pointMessage')(client);
+		require('../../utils/helpers/pointMessage')(client);
 	},
 };

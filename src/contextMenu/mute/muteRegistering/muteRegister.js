@@ -51,12 +51,12 @@ module.exports = async (client, muteData, timestamp) => {
 	};
 
 
-	let resB = await require('../../../utils/getButton')(reply, muteData.staff, 600000);
+	let resB = await require('../../../utils/awaitInterraction/getButton')(reply, muteData.staff, 600000);
 	if (resB == 'sub') {
 		await reply.edit({ content: '**● Send the proof image file or url in this channel.**', components: [new ActionRowBuilder().addComponents(button1.setDisabled(true).setLabel('Submitting'))] });
 		channel.permissionOverwrites.create(muteData.staff, { SendMessages: true });
 
-		const resM = await require('../../../utils/getMessage')(muteData.staff, channel, 300000);
+		const resM = await require('../../../utils/awaitInterraction/getMessage')(muteData.staff, channel, 300000);
 		if (resM == 'no-res') resB = 'no-res';
 		else regSec(resM);
 

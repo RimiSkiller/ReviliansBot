@@ -1,5 +1,5 @@
 const wait = require('node:timers/promises').setTimeout;
-const getAllFiles = require('../../utils/getAllFiles');
+const getAllFiles = require('../../utils/getFiles/getAllFiles');
 const path = require('path');
 const ms = require('ms');
 

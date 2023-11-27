@@ -1,5 +1,5 @@
-const Points = require('../models/staffPoints');
-const { pointsChannel } = require('../../config.json');
+const Points = require('../../models/staffPoints');
+const { pointsChannel } = require('../../../config.json');
 const { EmbedBuilder, ActionRowBuilder, ButtonStyle, ButtonBuilder, UserSelectMenuBuilder } = require('discord.js');
 
 /**

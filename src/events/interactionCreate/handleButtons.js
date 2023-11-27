@@ -1,5 +1,5 @@
 const { dev } = require('../../../config.json');
-const getLocalInteractions = require('../../utils/getLocalInteractions');
+const getLocalInteractions = require('../../utils/getFiles/getLocalInteractions');
 
 /**
  * @param {import('discord.js').Client} client
@@ -8,7 +8,7 @@ const getLocalInteractions = require('../../utils/getLocalInteractions');
 module.exports = async (client, interaction) => {
 	if (!interaction.isButton()) return;
 
-	const localCommands = getLocalInteractions('buttons');
+	const localCommands = getLocalInteractions('../buttons');
 
 	try {
 		const commandObject = localCommands.find(

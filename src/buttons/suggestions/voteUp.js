@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const { suggChannel } = require('../../../config.json');
 const Suggestion = require('../../models/suggestions');
-const barMaker = require('../../utils/barMaker');
+const barMaker = require('../../utils/helpers/barMaker');
 
 module.exports = {
 	id: 'suggUp',

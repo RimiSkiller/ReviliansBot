@@ -41,7 +41,7 @@ module.exports = {
 		});
 		if (check) {
 			interaction.editReply(`**📢 - Called <@${user.id}>.**`);
-			const res = await require('../../utils/getButton')(msg, user.id, 900_000);
+			const res = await require('../../utils/awaitInterraction/getButton')(msg, user.id, 900_000);
 			if (res == 'rejectCall') {
 				interaction.user.send(`**${user.displayName} has rejected your call.**`);
 			}

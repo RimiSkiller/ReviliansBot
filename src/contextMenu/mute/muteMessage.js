@@ -53,7 +53,7 @@ module.exports = {
 		const collected = await interaction.awaitModalSubmit({ filter: m => m.customId == `suggModal-${interaction.user.id}`, time: 300_000 });
 		if (collected) {
 			collected.deferReply();
-			const image = await require('../../utils/proofMaker')(interaction, message);
+			const image = await require('../../utils/helpers/proofMaker')(interaction, message);
 			const time = ms(collected.fields.getTextInputValue('time'));
 			if (!time) return collected.reply('**❌ - That\'s not a valid duration, ex: `15m, 10h, 3d`.**');
 			const reason = collected.fields.getTextInputValue('reason');

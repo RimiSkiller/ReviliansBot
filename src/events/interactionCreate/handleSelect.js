@@ -1,5 +1,5 @@
 const { dev } = require('../../../config.json');
-const getLocalInteractions = require('../../utils/getLocalInteractions');
+const getLocalInteractions = require('../../utils/getFiles/getLocalInteractions');
 
 /**
  * @param {import('discord.js').Client} client

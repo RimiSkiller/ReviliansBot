@@ -1,9 +1,8 @@
 const { TextInputBuilder, TextInputStyle, ModalBuilder, ActionRowBuilder } = require('discord.js');
-const nodeHtmlToImage = require('node-html-to-image');
-const { generateFromMessages } = require('discord-html-transcripts');
 const ms = require('ms');
 const { muteRole, mainserver } = require('../../../config.json');
 const TRoles = require('../../models/temproles');
+
 
 module.exports = {
 	name: 'Mute Member (proof)',
@@ -14,6 +13,7 @@ module.exports = {
 	callback: async (client, interaction) => {
 		const message = interaction.targetMessage;
 		const member = await client.guilds.cache.get(mainserver).members.fetch(message.author.id).catch(() => null);
+		if (!message.content) return interaction.reply({ content: '**❌ - Can\'t detect any content in this message.**', ephemeral: true });
 
 
 		// check role order
@@ -39,13 +39,6 @@ module.exports = {
 			.setMaxLength(3)
 			.setRequired(true)
 			.setPlaceholder('3d, 1w, 6h...');
-		const lengthInput = new TextInputBuilder()
-			.setCustomId('length')
-			.setLabel('Lenght:')
-			.setStyle(TextInputStyle.Short)
-			.setMinLength(1)
-			.setMaxLength(2)
-			.setPlaceholder('the amount of message to be shown in the proof. (defualt: 3)');
 		const reasonInput = new TextInputBuilder()
 			.setCustomId('reason')
 			.setLabel('Reason:')
@@ -55,22 +48,12 @@ module.exports = {
 		const modal = new ModalBuilder()
 			.setCustomId(`suggModal-${interaction.user.id}`)
 			.setTitle('Suggestion Replier')
-			.addComponents(new ActionRowBuilder().addComponents(timeInput), new ActionRowBuilder().addComponents(lengthInput), new ActionRowBuilder().addComponents(reasonInput));
+			.addComponents(new ActionRowBuilder().addComponents(timeInput), new ActionRowBuilder().addComponents(reasonInput));
 		interaction.showModal(modal);
 		const collected = await interaction.awaitModalSubmit({ filter: m => m.customId == `suggModal-${interaction.user.id}`, time: 300_000 });
 		if (collected) {
-			const length = collected.fields.getTextInputValue('length') || 3;
-
-			const messages = await interaction.channel.messages.fetch({ around: message.id, limit: isNaN(length) ? 3 : length, cache: false });
 			collected.deferReply();
-			const html = await generateFromMessages(messages.reverse(), interaction.channel, {
-				returnType: 'string',
-				footerText: 'Revilians automatic mute system',
-				poweredBy: false,
-			});
-			const image = await nodeHtmlToImage({
-				html: html,
-			});
+			const image = await require('../../utils/proofMaker')(interaction, message);
 			const time = ms(collected.fields.getTextInputValue('time'));
 			if (!time) return collected.reply('**❌ - That\'s not a valid duration, ex: `15m, 10h, 3d`.**');
 			const reason = collected.fields.getTextInputValue('reason');

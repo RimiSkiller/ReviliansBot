@@ -30,9 +30,13 @@ module.exports = async (client, muteData, timestamp) => {
 		.setCustomId('sub')
 		.setLabel('Submit Proof')
 		.setStyle(ButtonStyle.Primary);
+	const button2 = new ButtonBuilder()
+		.setCustomId('cancel')
+		.setLabel('No proof')
+		.setStyle(ButtonStyle.Danger);
 
 
-	const reply = await channel.send({ content: `## <@${muteData.staff}>, Please click on the button to provide a proof.`, embeds: [proofEmbed], components: [new ActionRowBuilder().addComponents(button1)] });
+	const reply = await channel.send({ content: `## <@${muteData.staff}>, Please click on the button to provide a proof.`, embeds: [proofEmbed], components: [new ActionRowBuilder().addComponents(button1, button2)] });
 
 
 	const regSec = async (resM) => {
@@ -58,7 +62,7 @@ module.exports = async (client, muteData, timestamp) => {
 
 		channel.permissionOverwrites.delete(muteData.staff);
 	}
-	if (resB == 'no-res') {
+	if (resB == 'no-res' || resB == 'cancel') {
 		const m = await client.guilds.cache.get(mainserver).members.fetch(member.id);
 		m.roles.remove(muteRole);
 		await TRoles.findOne({ role: muteRole, member: muteData.member }).deleteOne();

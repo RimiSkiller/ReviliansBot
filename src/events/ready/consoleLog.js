@@ -1,5 +1,3 @@
-const { log, proof } = require('../../../config.json');
-
 /**
  * @param {import('discord.js').Client} client
  */

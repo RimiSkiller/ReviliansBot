@@ -17,8 +17,8 @@ module.exports = (upvotes = 0, downvotes = 0) => {
 		emptySquares = progressBarLength;
 	}
 
-	const upPercentage = (upvotes / totalVotes) * 100 || 0;
-	const downPercentage = (downvotes / totalVotes) * 100 || 0;
+	const upPercentage = Math.round((upvotes / totalVotes) * 100) || 0;
+	const downPercentage = Math.round((downvotes / totalVotes) * 100) || 0;
 
 	const progressBar =
 		(filledSquares ? pb.lf : pb.le) +

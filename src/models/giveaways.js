@@ -21,6 +21,10 @@ const giveawaysSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	winners: {
+		type: Number,
+		default: 1,
+	},
 });
 
 module.exports = model('giveaway', giveawaysSchema);

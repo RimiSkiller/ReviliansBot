@@ -40,11 +40,11 @@ module.exports = {
 			.setColor(0x5865f2)
 			.addFields({ name: '● Prize:', value: prize })
 			.addFields({ name: '● Time:', value: `<t:${Math.floor((time + Date.now()) / 1000)}:R>` })
-			.setFooter({ text: `By: ${interaction.member.displayName}`, iconURL: interaction.member.displayAvatarURL() })
+			.setFooter({ text: `By: ${interaction.member.displayName}\nWinners: ${winners}`, iconURL: interaction.member.displayAvatarURL() })
 			.setThumbnail(interaction.guild.iconURL());
 
 		const button = new ButtonBuilder()
-			.setCustomId('giveaway')
+			.setCustomId('giveawayEnter')
 			.setEmoji('🎉')
 			.setLabel('0')
 			.setStyle(ButtonStyle.Primary);

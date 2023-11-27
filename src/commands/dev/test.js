@@ -1,25 +1,9 @@
-const nodeHtmlToImage = require('node-html-to-image');
-const { generateFromMessages } = require('discord-html-transcripts');
-const { ApplicationCommandOptionType } = require('discord.js');
-const Points = require('../../models/staffPoints');
+const { EmbedBuilder } = require('@discordjs/builders');
+const make = require('../../utils/proofMaker');
 
 module.exports = {
 	name: 'test',
 	description: 'testing command',
-	options: [
-		{
-			name: 'user',
-			description: 'msgid',
-			required: true,
-			type: ApplicationCommandOptionType.User,
-		},
-		{
-			name: 'points',
-			description: 'msgid',
-			required: true,
-			type: ApplicationCommandOptionType.Number,
-		},
-	],
 	devOnly: true,
 	testOnly: true,
 	/**
@@ -27,9 +11,6 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		await new Points({
-			staff: interaction.options.get('user').value,
-			points: interaction.options.get('points').value,
-		}).save();
+		client.channels.cache.get('1178482291916427366').send({ embeds: [new EmbedBuilder().setDescription('.')] });
 	},
 };

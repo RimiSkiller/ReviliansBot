@@ -2,7 +2,7 @@ require('dotenv/config');
 const { mainserver } = require('./config.json');
 const { ContextMenuCommandBuilder, ApplicationCommandType, REST, Routes, PermissionsBitField } = require('discord.js');
 
-const commandsData = [
+const commandsDataMain = [
 	new ContextMenuCommandBuilder()
 		.setName('Accept Suggestion')
 		.setDMPermission(false)
@@ -28,6 +28,28 @@ const commandsData = [
 		.setDMPermission(false)
 		.setType(ApplicationCommandType.User)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.ModerateMembers),
+	new ContextMenuCommandBuilder()
+		.setName('Reroll Giveaway')
+		.setDMPermission(false)
+		.setType(ApplicationCommandType.Message)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.ManageEvents),
+	new ContextMenuCommandBuilder()
+		.setName('End Giveaway')
+		.setDMPermission(false)
+		.setType(ApplicationCommandType.Message)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.ManageEvents),
+];
+const commandsDataStaff = [
+	new ContextMenuCommandBuilder()
+		.setName('Reroll Giveaway')
+		.setDMPermission(false)
+		.setType(ApplicationCommandType.Message)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.ManageEvents),
+	new ContextMenuCommandBuilder()
+		.setName('End Giveaway')
+		.setDMPermission(false)
+		.setType(ApplicationCommandType.Message)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.ManageEvents),
 ];
 
 const rest = new REST().setToken(process.env.TOKEN);
@@ -37,7 +59,11 @@ const rest = new REST().setToken(process.env.TOKEN);
 		console.log('Registering Context Commands.');
 		await rest.put(
 			Routes.applicationGuildCommands(process.env.CLIENT_ID, mainserver),
-			{ body: commandsData },
+			{ body: commandsDataMain },
+		);
+		await rest.put(
+			Routes.applicationGuildCommands(process.env.CLIENT_ID, '1074476503431139438'),
+			{ body: commandsDataStaff },
 		);
 	}
 	catch (error) {

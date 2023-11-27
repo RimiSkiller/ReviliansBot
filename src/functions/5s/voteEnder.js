@@ -3,13 +3,12 @@ const Votes = require('../../models/votes');
 const { ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
 /**
  * @param {import('discord.js').Client} client
- * @param {import('discord.js').Message} message
  */
 module.exports = async (client) => {
 	const votes = await Votes.where('time').lte(Date.now());
 	votes.forEach(async vote => {
 		const channel = await client.channels.fetch(vote.channel, { cache: false });
-		const message = channel.messages.cache.get(vote.message);
+		const message = await channel.messages.fetch(vote.message);
 		const upRec = message.reactions.cache.get('1173758537227309067');
 		const downRec = message.reactions.cache.get('1173758586816561235');
 		const upCount = upRec.count - 1;

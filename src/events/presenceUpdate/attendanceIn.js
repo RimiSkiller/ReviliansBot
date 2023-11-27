@@ -12,7 +12,7 @@ module.exports = async (client, oldPresence, newPresence) => {
 	await client.wait(600_000);
 	const member = newPresence.member;
 	const check = await Checks.findOne({ staff: member.id });
-	if (!check || check.online) return;
+	if (!check || check.online || member.presence.status != 'online') return;
 	const button = new ButtonBuilder({ customId: 'check-in', label: 'Check-In', style: ButtonStyle.Success });
 	member.send({ content: '**ℹ️ - You\'ve been online for 10 minutes, Do you want to check-in?**', components: [new ActionRowBuilder().addComponents(button)] }).then(msg => setTimeout(() => msg.delete(), 300_000));
 };

@@ -1,5 +1,5 @@
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
-const { proof, mainserver } = require('../../../../config.json');
+const { proof, mainserver } = require('../../../../configs/config.json');
 const Mutes = require('../../../models/mutes');
 const ms = require('ms');
 /**

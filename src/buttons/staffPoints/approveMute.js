@@ -1,6 +1,6 @@
 const { EmbedBuilder, PermissionFlagsBits } = require('discord.js');
 const Points = require('../../models/staffPoints');
-const { log } = require('../../../config.json').pointsChannel;
+const { log } = require('../../../configs/config.json').pointsChannel;
 
 module.exports = {
 	id: 'proofApprove',

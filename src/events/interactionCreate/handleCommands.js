@@ -1,4 +1,4 @@
-const { dev } = require('../../../config.json');
+const { dev } = require('../../../configs/config.json');
 const getLocalCommands = require('../../utils/getFiles/getLocalInteractions');
 
 module.exports = async (client, interaction) => {

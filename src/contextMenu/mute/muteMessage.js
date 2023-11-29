@@ -1,6 +1,6 @@
 const { TextInputBuilder, TextInputStyle, ModalBuilder, ActionRowBuilder } = require('discord.js');
 const ms = require('ms');
-const { muteRole, mainserver } = require('../../../config.json');
+const { muteRole, mainserver } = require('../../../configs/config.json');
 const TRoles = require('../../models/temproles');
 
 

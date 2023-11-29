@@ -1,5 +1,5 @@
 const { EmbedBuilder, TextInputBuilder, ModalBuilder, ActionRowBuilder, TextInputStyle } = require('discord.js');
-const { suggChannel } = require('../../../config.json');
+const { suggChannel } = require('../../../configs/config.json');
 const Suggestion = require('../../models/suggestions');
 
 module.exports = {

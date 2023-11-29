@@ -1,6 +1,6 @@
 const Points = require('../../models/staffPoints');
 const { EmbedBuilder } = require('@discordjs/builders');
-const { log } = require('../../../config.json').pointsChannel;
+const { log } = require('../../../configs/config.json').pointsChannel;
 
 module.exports = {
 	id: 'staffDown',

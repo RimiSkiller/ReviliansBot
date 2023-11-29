@@ -1,6 +1,6 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
 const ms = require('ms');
-const { mainlog } = require('../../../config.json');
+const { mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	name: 'cooldown',

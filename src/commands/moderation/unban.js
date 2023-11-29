@@ -3,7 +3,7 @@ const {
 	PermissionFlagsBits,
 } = require('discord.js');
 const Ban = require('../../models/activeBan');
-const { mainlog } = require('../../../config.json');
+const { mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	name: 'unban',

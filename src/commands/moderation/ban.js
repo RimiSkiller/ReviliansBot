@@ -4,7 +4,7 @@ const {
 } = require('discord.js');
 const ms = require('ms');
 const Ban = require('../../models/activeBan');
-const { mainlog } = require('../../../config.json');
+const { mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	name: 'ban',

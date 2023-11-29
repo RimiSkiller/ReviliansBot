@@ -1,4 +1,4 @@
-const config = require('../../../config.json');
+const config = require('../../../configs/config.json');
 const Votes = require('../../models/votes');
 
 /**

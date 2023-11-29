@@ -1,5 +1,5 @@
 const Ban = require('../../models/activeBan');
-const { mainlog } = require('../../../config.json');
+const { mainlog } = require('../../../configs/config.json');
 /**
  * @param {import('discord.js').Client} client
  */

@@ -1,5 +1,5 @@
 require('dotenv/config');
-const { mainserver } = require('./config.json');
+const { mainserver } = require('./configs/config.json');
 const { ContextMenuCommandBuilder, ApplicationCommandType, REST, Routes, PermissionsBitField } = require('discord.js');
 
 const commandsDataMain = [

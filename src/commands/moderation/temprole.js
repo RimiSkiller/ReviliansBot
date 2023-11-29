@@ -1,7 +1,7 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
 const ms = require('ms');
 const TRoles = require('../../models/temproles');
-const { mainserver, mainlog } = require('../../../config.json');
+const { mainserver, mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	name: 'temprole',

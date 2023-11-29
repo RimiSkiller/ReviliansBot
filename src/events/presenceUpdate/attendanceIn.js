@@ -1,5 +1,5 @@
 const Checks = require('../../models/attendances');
-const { testServer } = require('../../../config.json');
+const { testServer } = require('../../../configs/config.json');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 /**
  * @param {import('discord.js').Client} client

@@ -128,4 +128,3 @@ dist
 
 command.example
 .eslintrc.json
-src/commands/dev/test.js

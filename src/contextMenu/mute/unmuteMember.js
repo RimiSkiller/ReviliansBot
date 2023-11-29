@@ -1,4 +1,4 @@
-const { muteRole } = require('../../../config.json');
+const { muteRole } = require('../../../configs/config.json');
 const TRoles = require('../../models/temproles');
 
 

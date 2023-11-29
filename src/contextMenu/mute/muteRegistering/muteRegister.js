@@ -1,5 +1,5 @@
 const { EmbedBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
-const { proof, mainserver, muteRole } = require('../../../../config.json');
+const { proof, mainserver, muteRole } = require('../../../../configs/config.json');
 const Mutes = require('../../../models/mutes');
 const TRoles = require('../../../models/temproles');
 const ms = require('ms');

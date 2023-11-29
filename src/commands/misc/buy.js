@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType } = require('discord.js');
-const { dev, goods, mainlog } = require('../../../config.json');
+const { dev, goods, mainlog } = require('../../../configs/config.json');
 const ms = require('ms');
 const TRoles = require('../../models/temproles');
 

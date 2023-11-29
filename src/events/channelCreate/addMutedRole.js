@@ -1,4 +1,4 @@
-const { muteRole, mainserver } = require('../../../config.json');
+const { muteRole, mainserver } = require('../../../configs/config.json');
 /**
  * @param {import('discord.js').Client} client
  * @param {import('discord.js').GuildChannel} channel

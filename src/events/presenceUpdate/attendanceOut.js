@@ -1,7 +1,7 @@
 const Checks = require('../../models/attendances');
-const { testServer } = require('../../../config.json');
+const { testServer } = require('../../../configs/config.json');
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } = require('discord.js');
-const { log } = require('../../../config.json').checkIn;
+const { log } = require('../../../configs/config.json').checkIn;
 const ms = require('ms');
 /**
  * @param {import('discord.js').Client} client

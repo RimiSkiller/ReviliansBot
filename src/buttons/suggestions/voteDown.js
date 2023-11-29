@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { suggChannel } = require('../../../config.json');
+const { suggChannel } = require('../../../configs/config.json');
 const Suggestion = require('../../models/suggestions');
 const barMaker = require('../../utils/helpers/barMaker');
 

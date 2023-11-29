@@ -1,6 +1,6 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const Checks = require('../../models/attendances');
-const checkIn = require('../../../config.json').checkIn.show;
+const checkIn = require('../../../configs/config.json').checkIn.show;
 
 /**
  * @param {import('discord.js').Client} client

@@ -1,6 +1,6 @@
 const Suggestions = require('../../models/suggestions');
 const Giveaways = require('../../models/giveaways');
-const { suggChannel } = require('../../../config.json');
+const { suggChannel } = require('../../../configs/config.json');
 /**
  * @param {import('discord.js').Client} client
  */

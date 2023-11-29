@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const Checks = require('../../models/attendances');
-const { log } = require('../../../config.json').checkIn;
+const { log } = require('../../../configs/config.json').checkIn;
 
 module.exports = {
 	id: 'check-in',

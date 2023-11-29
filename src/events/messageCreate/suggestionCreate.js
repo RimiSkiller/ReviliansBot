@@ -1,5 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require('@discordjs/builders');
-const { suggChannel } = require('../../../config.json');
+const { suggChannel } = require('../../../configs/config.json');
 const barMaker = require('../../utils/helpers/barMaker');
 const { ButtonStyle } = require('discord.js');
 const Suggs = require('../../models/suggestions');

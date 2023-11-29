@@ -1,5 +1,5 @@
 const TRoles = require('../../models/temproles');
-const { mainlog, mainserver } = require('../../../config.json');
+const { mainlog, mainserver } = require('../../../configs/config.json');
 /**
  * @param {import('discord.js').Client} client
  */

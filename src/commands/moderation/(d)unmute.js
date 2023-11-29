@@ -1,5 +1,5 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits } = require('discord.js');
-const { mainlog } = require('../../../config.json');
+const { mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	deleted: true,

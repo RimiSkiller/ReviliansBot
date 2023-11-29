@@ -1,4 +1,4 @@
-const { dev } = require('../../../config.json');
+const { dev } = require('../../../configs/config.json');
 const getLocalInteractions = require('../../utils/getFiles/getLocalInteractions');
 
 /**

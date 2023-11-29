@@ -11,6 +11,5 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		require('../../utils/helpers/checkInMessage')(client);
 	},
 };

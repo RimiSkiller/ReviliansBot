@@ -17,6 +17,7 @@ module.exports = {
 		if (check.afkStart) {
 			check.afkTime += Math.floor(Date.now() / 1000) - check.afkStart;
 			check.afkStart = 0;
+			interaction.guild.members.fetch(interaction.user.id).then(member => member.setNickname(check.name));
 		}
 		check.time += period - check.afkTime;
 		const afkTime = check.afkTime;

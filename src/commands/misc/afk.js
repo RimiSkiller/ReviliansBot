@@ -13,11 +13,15 @@ module.exports = {
 	 */
 	callback: async (client, interaction) => {
 		const attend = await Attend.findOne({ staff: interaction.user.id });
-		if (attend.afkStart) return interaction.reply({ content: '**🤔 - You are AFKing.**', ephemeral: true });
-		if (!attend.online) return interaction.reply({ content: '**🤔 - You must be checked-in to AFK.**', ephemeral: true });
+		if (!attend?.online) return interaction.reply({ content: '**🤔 - You must be checked-in to AFK.**', ephemeral: true });
+		if (!attend || attend.afkStart) return interaction.reply({ content: '**🤔 - You are AFKing.**', ephemeral: true });
 		attend.afkStart = Math.floor(Date.now() / 1000);
-		await attend.save();
 		interaction.reply({ content: '**😴 - You\'re AFKing now...**', ephemeral: true });
+		interaction.guild.members.fetch(interaction.user.id).then(member => {
+			attend.name = member.displayName;
+			member.setNickname(`${member.displayName} [AFK]`);
+		});
+		await attend.save();
 		const embed = new EmbedBuilder()
 			.setDescription(`**💤 - <@${interaction.user.id}> started AFKing at <t:${Math.floor(Date.now() / 1000)}>**`)
 			.setColor(0xFF7575);

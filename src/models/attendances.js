@@ -25,6 +25,10 @@ const attendanceSchema = new Schema({
 		type: Number,
 		default: 0,
 	},
+	name: {
+		type: String,
+		default: null,
+	},
 });
 
 module.exports = model('attendance', attendanceSchema);

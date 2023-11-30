@@ -1,4 +1,5 @@
 const config = require('../../../configs/config.json');
+const logger = require('../../../configs/logger.json');
 const Votes = require('../../models/votes');
 
 /**
@@ -14,6 +15,8 @@ module.exports = async (client) => {
 	await client.channels.fetch(config.pointsChannel.log, { cache: true });
 	await client.channels.fetch(config.checkIn.show, { cache: true });
 	await client.channels.fetch(config.checkIn.log, { cache: true });
+
+	for (const log in logger) await client.channels.fetch(logger[log], { cache: true });
 
 	// servers
 	client.mainServer = await client.guilds.fetch(config.mainserver);

@@ -17,6 +17,14 @@ const attendanceSchema = new Schema({
 		type: Number,
 		default: null,
 	},
+	afkTime: {
+		type: Number,
+		default: 0,
+	},
+	afkStart: {
+		type: Number,
+		default: 0,
+	},
 });
 
 module.exports = model('attendance', attendanceSchema);

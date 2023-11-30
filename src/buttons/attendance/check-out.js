@@ -14,13 +14,20 @@ module.exports = {
 		if (!check.online) return interaction.reply({ content: '**🤔 - You\'ve already checked-out.**', ephemeral: true });
 		check.online = false;
 		const period = Math.floor(Date.now() / 1000) - check.lastCheck;
-		check.time += period;
+		if (check.afkStart) {
+			check.afkTime += Math.floor(Date.now() / 1000) - check.afkStart;
+			check.afkStart = 0;
+		}
+		check.time += period - check.afkTime;
+		const afkTime = check.afkTime;
+		check.afkTime = 0;
 		await check.save();
-		interaction.reply({ content: `**🔴 - You've checked-out successfully. You have been online for \`${ms(period * 1000, { long: true })}\`**`, ephemeral: true });
+		interaction.reply({ content: `**🔴 - You've checked-out successfully. You have been online for \`${ms(period * 1000, { long: true })}\`${afkTime ? `, Removed \`${ms(afkTime * 1000, { long: true })}\` for AFKing.` : '.'}**`, ephemeral: true });
 		const embed = new EmbedBuilder()
-			.setDescription(`**<@${interaction.user.id}> checked-out at <t:${Math.floor(Date.now() / 1000)}>**`)
+			.setDescription(`**🔴 - <@${interaction.user.id}> checked-out at <t:${Math.floor(Date.now() / 1000)}>**`)
 			.setColor(0xff0000);
 		client.channels.cache.get(log).send({ embeds: [embed] });
+		if (interaction.guild == null) interaction.message.delete();
 		require('../../utils/helpers/attendanceMessage')(client);
 	},
 };

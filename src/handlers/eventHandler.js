@@ -9,12 +9,9 @@ module.exports = (client) => {
 		eventFiles.sort((a, b) => a > b);
 
 		const eventName = eventFolder.replace(/\\/g, '/').split('/').pop();
-
+		console.log(`📃 - Loaded "${eventName}" Event`);
 		client.on(eventName, async (...args) => {
-			for (const eventFile of eventFiles) {
-				const eventFunction = require(eventFile);
-				await eventFunction(client, ...args);
-			}
+			for (const eventFile of eventFiles) await require(eventFile)(client, ...args);
 		});
 	}
 };

@@ -1,6 +1,5 @@
 require('dotenv').config();
 const { Client, IntentsBitField } = require('discord.js');
-const eventHandler = require('./handlers/eventHandler');
 const { connect } = require('mongoose');
 
 const client = new Client({
@@ -11,6 +10,8 @@ const client = new Client({
 		IntentsBitField.Flags.MessageContent,
 		IntentsBitField.Flags.GuildMessageReactions,
 		IntentsBitField.Flags.GuildPresences,
+		IntentsBitField.Flags.GuildModeration,
+		IntentsBitField.Flags.MessageContent,
 	],
 });
 
@@ -19,7 +20,8 @@ client.wait = require('node:timers/promises').setTimeout;
 (async () => {
 	try {
 		await connect(process.env.MONGO).then(() => console.log('☑️  - Logged in to database.'));
-		eventHandler(client);
+		require('./handlers/eventHandler')(client);
+		require('./handlers/logHandler')(client);
 		client.login(process.env.TOKEN);
 	}
 	catch (error) {

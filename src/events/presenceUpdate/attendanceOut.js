@@ -23,7 +23,7 @@ module.exports = async (client, oldPresence, newPresence) => {
 	if (check.afkStart) {
 		check.afkTime += Math.floor(Date.now() / 1000) - check.afkStart;
 		check.afkStart = 0;
-		member.setNickname(check.name);
+		client.mainServer.members.fetch(member.id).then(mem => mem.setNickname(check.name != mem.user.displayName ? check.name : null));
 	}
 	check.time += period - check.afkTime;
 	const afkTime = check.afkTime;

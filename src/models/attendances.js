@@ -29,6 +29,10 @@ const attendanceSchema = new Schema({
 		type: String,
 		default: null,
 	},
+	afkMessage: {
+		type: String,
+		default: null,
+	},
 });
 
 module.exports = model('attendance', attendanceSchema);

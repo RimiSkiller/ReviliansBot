@@ -36,7 +36,7 @@ module.exports = async (client) => {
 						options,
 					});
 
-					console.log(`🔁 - Edited command "${name}".`);
+					console.log(`✏️ - Edited command "${name}".`);
 				}
 			}
 			else {

@@ -6,8 +6,8 @@ const checkIn = require('../../../configs/config.json').checkIn.show;
  * @param {import('discord.js').Client} client
  */
 module.exports = async (client) => {
-	const checks = (await Checks.find()).filter(c => c.online);
-	const dataShow = checks.map(c => `- <@${c.staff}>${c.afk ? ' [AFK]' : ''}: <t:${c.lastCheck}>`);
+	const checks = (await Checks.find()).filter(c => c.online).sort((m, n) => m.lastCheck - n.lastCheck);
+	const dataShow = checks.map(c => `- <@${c.staff}>${c.afkStart ? ' [AFK]' : ''}: <t:${c.lastCheck}>`);
 	const channel = client.channels.cache.get(checkIn);
 	const embed = new EmbedBuilder()
 		.setTitle('Staff Attendance System')

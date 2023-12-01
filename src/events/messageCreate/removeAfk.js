@@ -12,7 +12,7 @@ module.exports = async (client, message) => {
 	attend.afkTime += Math.floor(Date.now() / 1000) - attend.afkStart;
 	attend.afkStart = 0;
 	await attend.save();
-	message.member.setNickname(attend.name);
+	message.member.setNickname(attend.name != message.author.displayName ? attend.name : null);
 	message.reply({ content: '**👋 - Welcome Back, removed your afk.**' }).then(msg => setTimeout(() => msg.delete(), 5000));
 	const embed = new EmbedBuilder()
 		.setDescription(`**💤 - <@${message.author.id}> stoped AFKing at <t:${Math.floor(Date.now() / 1000)}>**`)

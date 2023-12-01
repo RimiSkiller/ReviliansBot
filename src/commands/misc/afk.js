@@ -32,7 +32,7 @@ module.exports = {
 		});
 		await attend.save();
 		const embed = new EmbedBuilder()
-			.setDescription(`**💤 - <@${interaction.user.id}> started AFKing at <t:${Math.floor(Date.now() / 1000)}>**`)
+			.setDescription(`**💤 - <@${interaction.user.id}> started AFKing at <t:${Math.floor(Date.now() / 1000)}>**${msg ? `\n**● Message:** ${msg}` : ''}`)
 			.setColor(0xFF7575);
 		client.channels.cache.get(log).send({ embeds: [embed] });
 		require('../../utils/helpers/attendanceMessage')(client);

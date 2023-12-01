@@ -8,8 +8,8 @@ const ms = require('ms');
  */
 module.exports = async (client, muteData, timestamp) => {
 	const channel = client.channels.cache.get(proof.mute);
-	const memberMutes = (await Mutes.find({ member: muteData.member })).length + 1;
-	const staffMutes = (await Mutes.find({ Staff: muteData.staff })).length + 1;
+	const memberMutes = (await Mutes.find({ member: muteData.member })).filter(d => !d.refused).length + 1;
+	const staffMutes = (await Mutes.find({ Staff: muteData.staff })).filter(d => !d.refused).length + 1;
 	const member = await client.users.fetch(muteData.member, { cache: false });
 
 	const image = new AttachmentBuilder(muteData.proof, { name: 'proof.png' });

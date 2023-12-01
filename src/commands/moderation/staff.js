@@ -36,7 +36,6 @@ module.exports = {
 		const button_i = new ButtonBuilder()
 			.setCustomId('index')
 			.setStyle(ButtonStyle.Secondary)
-			.setDisabled(true)
 			.setLabel(`${data.length - index}/${data.length}`);
 		let res;
 		await interaction.deferReply();
@@ -45,13 +44,20 @@ module.exports = {
 				button_b.setDisabled(false); button_f.setDisabled(false);
 				if (index == 0) button_b.setDisabled(true);
 				if (index == data.length - 1) button_f.setDisabled(true);
+				if (data[index].refused) data[index].embed.color = 16711680;
 				const reply = await interaction.editReply({ embeds: [data[index].embed], components: [new ActionRowBuilder().addComponents(button_f, button_i, button_b)] });
-				res = await require('../../utils/awaitInterraction/getButton')(reply);
-				if (res == 'backward') index--;
-				else if (res == 'forward') index++;
+				res = await require('../../utils/awaitInterraction/getButton')(reply, interaction.user.id);
+				if (res == 'backward') { index--; }
+				else if (res == 'forward') { index++; }
+				else if (res == 'index') {
+					const msg = await interaction.channel.send('**● Send page number:**');
+					const resM = await require('../../utils/awaitInterraction/getMessage')(interaction.user.id, interaction.channel);
+					if (!isNaN(resM) && resM > 0 && resM <= data.length) index = data.length - resM;
+					await msg.delete();
+				}
 				button_i.setLabel(`${data.length - index}/${data.length}`);
 			}
-			interaction.editReply({ components: [new ActionRowBuilder().addComponents(button_f.setDisabled(true), button_i, button_b.setDisabled(true))] });
+			interaction.editReply({ components: [new ActionRowBuilder().addComponents(button_f.setDisabled(true), button_i.setDisabled(true), button_b.setDisabled(true))] });
 		}
 		catch (e) {
 			console.error(e);

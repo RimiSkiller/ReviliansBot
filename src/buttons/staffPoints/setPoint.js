@@ -12,7 +12,7 @@ module.exports = {
 		const user = interaction.message.mentions.users.first();
 		if (!user) return interaction.reply({ content: '**❌ - Please select a staff to manage his point.**', ephemeral: true });
 		interaction.reply({ content: '**● Send points amount to set.**', ephemeral: true });
-		const res = await require('../../utils/helpers/getMessage')(interaction.user.id, interaction.channel);
+		const res = await require('../../utils/awaitInterraction/getMessage')(interaction.user.id, interaction.channel);
 		if (res == 'no-res') return;
 		if (isNaN(res)) return interaction.editReply('**❌ - You didn\'t provide a valid number.**');
 		const data = await Points.findOne({ staff: user.id }) || new Points({ staff: user.id });

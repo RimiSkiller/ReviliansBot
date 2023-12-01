@@ -13,6 +13,10 @@ const mutesSchema = new Schema({
 		type: Object,
 		required: true,
 	},
+	refused: {
+		type: Boolean,
+		default: false,
+	},
 });
 
 module.exports = model('mute', mutesSchema);

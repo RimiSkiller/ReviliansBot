@@ -7,7 +7,7 @@ const Votes = require('../../models/votes');
  */
 module.exports = async (client) => {
 	// channels
-	await client.channels.fetch(config.mainlog, { cache: true });
+	client.log = async (m) => (await client.channels.fetch(config.mainlog, { cache: true })).send(m);
 	await client.channels.fetch(config.proof.mute, { cache: true });
 	await client.channels.fetch(config.proof.nomute, { cache: true });
 	await client.channels.fetch(config.pointsChannel.show, { cache: true });

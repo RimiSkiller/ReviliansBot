@@ -6,6 +6,7 @@ const { messageDeleted } = require('../../configs/logger.json');
  */
 module.exports = (client, message) => {
 	if (message.guild.id != client.mainServer.id) return;
+	if (message.author.id == client.user.id) return;
 	const log = client.channels.cache.get(messageDeleted);
 	const embed = new EmbedBuilder()
 		.setColor(0x5865f2)

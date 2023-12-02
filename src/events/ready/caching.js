@@ -33,4 +33,7 @@ module.exports = async (client) => {
 
 	// members
 	await client.staffServer.members.fetch({ cache: true });
+
+	// client variables
+	client.color = 0x5865f2;
 };

@@ -50,6 +50,11 @@ const commandsDataStaff = [
 		.setDMPermission(false)
 		.setType(ApplicationCommandType.Message)
 		.setDefaultMemberPermissions(PermissionsBitField.Flags.ManageEvents),
+	new ContextMenuCommandBuilder()
+		.setName('Attendance Time')
+		.setDMPermission(false)
+		.setType(ApplicationCommandType.User)
+		.setDefaultMemberPermissions(PermissionsBitField.Flags.Administrator),
 ];
 
 const rest = new REST().setToken(process.env.TOKEN);

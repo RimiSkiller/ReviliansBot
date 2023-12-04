@@ -14,7 +14,7 @@ module.exports = {
 			name: 'user',
 			description: 'The user to ban.',
 			required: true,
-			type: ApplicationCommandOptionType.Mentionable,
+			type: ApplicationCommandOptionType.User,
 		},
 		{
 			name: 'duration',

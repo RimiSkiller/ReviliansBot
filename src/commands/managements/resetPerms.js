@@ -1,18 +1,18 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits, ChannelType } = require('discord.js');
 
 module.exports = {
-	name: 'lock',
-	description: 'prevent all members or a specific member from sending messages in a channel',
+	name: 'reset-permissions',
+	description: 'reset all members or a specific member permissions in a channel',
 	options: [
 		{
 			name: 'channel',
-			description: 'the channel you want to lock',
+			description: 'the channel you want to reset',
 			type: ApplicationCommandOptionType.Channel,
 			channelTypes: [ChannelType.GuildText],
 		},
 		{
 			name: 'member',
-			description: 'the member you want to prevent him from sending messages',
+			description: 'the member you want to reset his permissions in the channel',
 			type: ApplicationCommandOptionType.User,
 			channelTypes: [ChannelType.GuildText],
 		},
@@ -31,8 +31,9 @@ module.exports = {
 		const channel = await interaction.guild.channels.fetch(interaction.options.get('channel')?.value || interaction.channelId, { cache: false }).catch(() => null);
 		if (!channel) return interaction.reply({ content: '**❌ - You didn\'t provide a valid channel.**', ephemeral: true });
 		channel.permissionOverwrites.edit(perms, {
-			SendMessages: false,
+			ViewChannel: null,
+			SendMessages: null,
 		});
-		interaction.reply(`**🔒 - Locked: ${channel} for ${!user ? 'everyone' : `<@${member.id}>`}.**`);
+		interaction.reply(`**🔄️ - Reseted: ${channel} to ${!user ? 'everyone' : `<@${member.id}>`}.**`);
 	},
 };

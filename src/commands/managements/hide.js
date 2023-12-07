@@ -1,18 +1,18 @@
 const { ApplicationCommandOptionType, PermissionFlagsBits, ChannelType } = require('discord.js');
 
 module.exports = {
-	name: 'lock',
-	description: 'prevent all members or a specific member from sending messages in a channel',
+	name: 'hide',
+	description: 'prevent all members or a specific member from viewing a channel',
 	options: [
 		{
 			name: 'channel',
-			description: 'the channel you want to lock',
+			description: 'the channel you want to hide',
 			type: ApplicationCommandOptionType.Channel,
 			channelTypes: [ChannelType.GuildText],
 		},
 		{
 			name: 'member',
-			description: 'the member you want to prevent him from sending messages',
+			description: 'the member you want to prevent him from viewing the channel',
 			type: ApplicationCommandOptionType.User,
 			channelTypes: [ChannelType.GuildText],
 		},
@@ -31,8 +31,8 @@ module.exports = {
 		const channel = await interaction.guild.channels.fetch(interaction.options.get('channel')?.value || interaction.channelId, { cache: false }).catch(() => null);
 		if (!channel) return interaction.reply({ content: '**❌ - You didn\'t provide a valid channel.**', ephemeral: true });
 		channel.permissionOverwrites.edit(perms, {
-			SendMessages: false,
+			ViewChannel: false,
 		});
-		interaction.reply(`**🔒 - Locked: ${channel} for ${!user ? 'everyone' : `<@${member.id}>`}.**`);
+		interaction.reply(`**🕶️ - Hided: ${channel} from ${!user ? 'everyone' : `<@${member.id}>`}.**`);
 	},
 };

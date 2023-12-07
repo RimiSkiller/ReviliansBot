@@ -33,6 +33,6 @@ module.exports = {
 		channel.permissionOverwrites.edit(perms, {
 			SendMessages: true,
 		});
-		interaction.reply(`**🔒 - Unlocked: ${channel} for ${!user ? 'everyone' : `<@${member.id}>`}.**`);
+		interaction.reply(`**🔓 - Unlocked: ${channel} for ${!user ? 'everyone' : `<@${member.id}>`}.**`);
 	},
 };

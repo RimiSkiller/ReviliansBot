@@ -21,9 +21,10 @@ module.exports = {
 		const amount = interaction.options.get('amount')?.value || 100;
 		if (amount > 100 || amount < 1) return interaction.followUp('**❌ - You can\'t clear more the 100 or less than 2 messages.**');
 		interaction.channel.messages.fetch({ limit: amount, cache: false }).then(async messages => {
-			await interaction.channel.bulkDelete(messages, true);
-			interaction.deleteReply();
-			interaction.channel.send(`**🗑️ - Deleted __${amount}__ messages from this channel.**`).then(msg => setTimeout(() => msg.delete(), 5000));
+			await interaction.channel.bulkDelete(messages, true).then(deleted => {
+				interaction.deleteReply();
+				interaction.channel.send(`**🗑️ - Deleted __${deleted.size}__ messages from this channel.**`).then(msg => setTimeout(() => msg.delete(), 5000));
+			});
 		});
 	},
 };

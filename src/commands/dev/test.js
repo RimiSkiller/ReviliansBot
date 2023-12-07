@@ -1,5 +1,4 @@
-const { EmbedBuilder } = require('@discordjs/builders');
-const make = require('../../utils/helpers/proofMaker');
+const { createCanvas, loadImage, registerFont } = require('canvas');
 
 module.exports = {
 	name: 'test',
@@ -11,6 +10,6 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		console.log(client.application.commands.cache.map(cmd => cmd.name));
+		client.emit('guildMemberAdd', interaction.member);
 	},
 };

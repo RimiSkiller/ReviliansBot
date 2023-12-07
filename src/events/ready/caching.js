@@ -15,6 +15,8 @@ module.exports = async (client) => {
 	await client.channels.fetch(config.pointsChannel.log, { cache: true });
 	await client.channels.fetch(config.checkIn.show, { cache: true });
 	await client.channels.fetch(config.checkIn.log, { cache: true });
+	await client.channels.fetch(config.welcome.channel, { cache: true });
+	await client.channels.fetch(config.welcome.messages, { cache: true });
 
 	for (const log in logger) await client.channels.fetch(logger[log], { cache: true });
 

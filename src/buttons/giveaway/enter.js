@@ -10,11 +10,21 @@ module.exports = {
 	callback: async (client, interaction) => {
 		const giveaway = await Giveaways.findOne({ message: interaction.message.id, channel: interaction.channelId });
 		if (!giveaway) return interaction.deferUpdate();
-		if (giveaway.joins.includes(interaction.user.id)) return interaction.reply({ content: '**🤔 - You have already entered this giveaway.**', ephemeral: true });
-		giveaway.joins.push(interaction.user.id);
-		await giveaway.save();
-		const button = new ButtonBuilder({ emoji: '🎉', customId: 'giveawayEnter', label: giveaway.joins.length, style: ButtonStyle.Primary });
-		interaction.message.edit({ components: [new ActionRowBuilder().addComponents(button)] });
-		interaction.reply({ content: `**🎉 - You have entered the giveaway. You have a chance to win:\n\`${giveaway.prize}\`**`, ephemeral: true });
+		if (giveaway.joins.includes(interaction.user.id)) {
+			await interaction.reply({ content: '**🤔 - You have left this giveaway. If you wish to win, repress the button.**', ephemeral: true });
+			giveaway.joins = giveaway.joins.filter(a => a != interaction.user.id);
+			console.log(giveaway.joins);
+			await giveaway.save();
+			const button1 = new ButtonBuilder({ emoji: '🎉', customId: 'giveawayEnter', label: giveaway.joins.length, style: ButtonStyle.Primary });
+			interaction.message.edit({ components: [new ActionRowBuilder().addComponents(button1)] });
+
+		}
+		else {
+			giveaway.joins.push(interaction.user.id);
+			await giveaway.save();
+			const button = new ButtonBuilder({ emoji: '🎉', customId: 'giveawayEnter', label: giveaway.joins.length, style: ButtonStyle.Primary });
+			interaction.message.edit({ components: [new ActionRowBuilder().addComponents(button)] });
+			interaction.reply({ content: `**🎉 - You have entered the giveaway. You have a chance to win:\n\`${giveaway.prize}\`**`, ephemeral: true });
+		}
 	},
 };

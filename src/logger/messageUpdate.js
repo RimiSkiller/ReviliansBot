@@ -8,6 +8,7 @@ const { messageEdited } = require('../../configs/logger.json');
 module.exports = (client, oldMessage, newMessage) => {
 	if (newMessage.guild.id != client.mainServer.id) return;
 	if (oldMessage.content == newMessage.content) return;
+	if (oldMessage.author.id == client.user.id) return;
 	const log = client.channels.cache.get(messageEdited);
 	const embed = new EmbedBuilder()
 		.setColor(0x5865f2)

@@ -15,6 +15,7 @@ module.exports = async (client) => {
 			.setFields([{ name: '● Prize:', value: giveaway.prize }, { name: '● Winners:', value: winners.map(m => `<@${m}>`).join(', ') || '\\- No one entered the giveaway.' }]);
 		const button = new ButtonBuilder({ emoji: '🎉', customId: 'giveawayEnter', label: giveaway.joins.length, style: ButtonStyle.Primary, disabled: true });
 		message.edit({ embeds: [embed], components: [new ActionRowBuilder().addComponents(button)] });
+		if (winners.length) channel.send({ content: `**🎉 - Congratulations to ${winners.map(m => `<@${m}>`).join(', ')} for winning the __[${giveaway.prize}](<${message.url}>)__**` });
 		giveaway.time = 'ended';
 		await giveaway.save();
 	});

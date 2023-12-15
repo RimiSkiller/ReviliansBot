@@ -8,7 +8,7 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI });
  * @param {import('discord.js').GuildMember} member
  */
 module.exports = async (client, member) => {
-	// if (member.guild.id != client.mainServer.id) return;
+	if (member.guild.id != client.mainServer.id) return;
 	const canvas = createCanvas(1920, 1080);
 	const ctx = canvas.getContext('2d');
 
@@ -42,7 +42,7 @@ module.exports = async (client, member) => {
 		.then(response => {
 			let answer = response.choices[0].message.content;
 			answer = answer.slice(1, answer.length - 1);
-			client.mainServer.channels.cache.get(welcome.channel).send({ content: '**● ' + answer.replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
+			client.mainServer.channels.cache.get(welcome).send({ content: '**● ' + answer.replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
 		});
 
 

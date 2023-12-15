@@ -4,7 +4,7 @@ const { mainserver, mainlog } = require('../../../configs/config.json');
 
 module.exports = {
 	name: 'temprole',
-	description: 'Manage a member temprole.',
+	description: 'Manage a member temprole',
 	options: [
 		{
 			type: ApplicationCommandOptionType.Subcommand,

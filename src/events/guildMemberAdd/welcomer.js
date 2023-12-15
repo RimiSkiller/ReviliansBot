@@ -19,7 +19,7 @@ module.exports = async (client, member) => {
 	ctx.textAlign = 'center';
 	ctx.fillText(member.displayName, 1350, 540, 1000);
 
-	await loadImage(member.user.displayAvatarURL()).then(image => {
+	await loadImage(member.user.displayAvatarURL({ extension: 'png' })).then(image => {
 		ctx.beginPath();
 		ctx.arc(430, 555, 315, 0, Math.PI * 2, true);
 		ctx.closePath();

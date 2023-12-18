@@ -1,4 +1,5 @@
 const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, EmbedBuilder, ButtonStyle, ButtonBuilder, ComponentType } = require('discord.js');
+const gpt = require('../../utils/helpers/gpt');
 
 module.exports = {
 	id: 'apply',
@@ -30,7 +31,7 @@ module.exports = {
 			answers.push({ id: question.id, label: label });
 		});
 		const button = new ButtonBuilder({ customId: 'startApply', label: 'Start Process', style: ButtonStyle.Success });
-		const msg = await interaction.user.send({ content: '**⤵️ - Click on the button to start the apply process.**', components: [new ActionRowBuilder().addComponents(button)] }).catch(() => interaction.reply({ content: '**🤔 - Open your DM to start the apply.**', ephemeral: true }));
+		const msg = await interaction.user.send({ content: '** ● ' + await gpt(`a user named "${interaction.member.displayName}" want to start filling an application in the server, wishing him good luck and inform him to press the "Start Process" button.`, `I want to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${interaction.guild.name}", you will send me the best message to reply to this scenario.`) + '**', components: [new ActionRowBuilder().addComponents(button)] }).catch(() => interaction.reply({ content: '**🤔 - Open your DM to start the apply.**', ephemeral: true }));
 		interaction.reply({ content: `**☑️ - You started a new appling process, [continue](<${msg.url}>)**`, ephemeral: true });
 		const inter = await msg.awaitMessageComponent({ filter: m => m.user.id == interaction.user.id, componentType: ComponentType.Button, time: 180000, errors: ['time'] }).catch(() => msg.delete());
 		if (inter.isButton) {

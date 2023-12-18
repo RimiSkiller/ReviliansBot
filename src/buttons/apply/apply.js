@@ -1,4 +1,4 @@
-const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, EmbedBuilder, ButtonStyle, ButtonBuilder } = require('discord.js');
+const { ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, EmbedBuilder, ButtonStyle, ButtonBuilder, ComponentType } = require('discord.js');
 
 module.exports = {
 	id: 'apply',
@@ -29,26 +29,29 @@ module.exports = {
 			modal.addComponents(new ActionRowBuilder().addComponents(text));
 			answers.push({ id: question.id, label: label });
 		});
-		interaction.showModal(modal);
-		await interaction.awaitModalSubmit({ filter: m => m.customId == `applyModal-${interaction.user.id}`, time: 600_000 }).then(async collected => {
-			try {
+		const button = new ButtonBuilder({ customId: 'startApply', label: 'Start Process', style: ButtonStyle.Success });
+		const msg = await interaction.user.send({ content: '**⤵️ - Click on the button to start the apply process.**', components: [new ActionRowBuilder().addComponents(button)] }).catch(() => interaction.reply({ content: '**🤔 - Open your DM to start the apply.**', ephemeral: true }));
+		interaction.reply({ content: `**☑️ - You started a new appling process, [continue](<${msg.url}>)**`, ephemeral: true });
+		const inter = await msg.awaitMessageComponent({ filter: m => m.user.id == interaction.user.id, componentType: ComponentType.Button, time: 180000, errors: ['time'] }).catch(() => msg.delete());
+		if (inter.isButton) {
+			inter.showModal(modal);
+			await inter.awaitModalSubmit({ filter: m => m.customId == `applyModal-${interaction.user.id}`, time: 600_000 }).then(async collected => {
 				const fields = answers.map(a => { return { name: a.label, value: collected.fields.getTextInputValue(a.id) || 'No answer' }; });
 				const embed = new EmbedBuilder()
 					.setTitle(`${applyType} #1`)
 					.setFields(fields)
 					.setColor(client.color);
+				const bar = require('../../utils/helpers/barMaker')(1, applyChannels.size - 1);
 				if (applyChannels.size > 1) {
-					const button = new ButtonBuilder({ emoji: '📩', customId: 'apply-followUp', label: 'Continue', style: ButtonStyle.Primary });
-					collected.reply({ content: `**● <@${interaction.user.id}>, Continue if the information is correct.\n● You can dismiss this message and start over.**`, embeds: [embed], components: [new ActionRowBuilder().addComponents(button)], ephemeral: true }).then(msg => setTimeout(() => msg.delete(), 20000));
+					const button1 = new ButtonBuilder({ emoji: '📩', customId: 'apply-followUp', label: 'Continue', style: ButtonStyle.Primary });
+					msg.edit({ content: `**● <@${interaction.user.id}>, Continue if the information is correct.\n● You can ignore this message and start over.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
 				}
 				else {
-					const button = new ButtonBuilder({ emoji: '📨', customId: 'apply-finish', label: 'Finish', style: ButtonStyle.Primary });
-					collected.reply({ content: `**● <@${interaction.user.id}>, Finish if the information is correct.\n● You can dismiss this message and start over.**`, embeds: [embed], components: [new ActionRowBuilder().addComponents(button)], ephemeral: true }).then(msg => setTimeout(() => msg.delete(), 20000));
+					const button1 = new ButtonBuilder({ emoji: '📨', customId: 'apply-finish', label: 'Finish', style: ButtonStyle.Primary });
+					msg.edit({ content: `**● <@${interaction.user.id}>, Finish if the information is correct.\n● You can ignore this message and start over.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
 				}
-			}
-			catch (e) {
-				console.error(e);
-			}
-		});
+				collected.deferUpdate();
+			});
+		}
 	},
 };

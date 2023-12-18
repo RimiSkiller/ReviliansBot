@@ -1,7 +1,5 @@
 const { createCanvas, registerFont, loadImage } = require('canvas');
 const { welcome } = require('../../../configs/config.json');
-const { OpenAI } = require('openai');
-const openai = new OpenAI({ apiKey: process.env.OPEN_AI });
 
 /**
  * @param {import('discord.js').Client} client
@@ -29,21 +27,8 @@ module.exports = async (client, member) => {
 		ctx.drawImage(image, 115, 240, 630, 630);
 	});
 
-
-	openai.chat.completions.create({
-		model: 'gpt-3.5-turbo-16k-0613',
-		messages: [
-			{
-				role: 'user',
-				content: `as a Discord user, send a single  short welcome message to a user named "${member.displayName}" who joined a server named "${member.guild.name}", make the message related to the user name.`,
-			},
-		],
-	})
-		.then(response => {
-			let answer = response.choices[0].message.content;
-			answer = answer.slice(1, answer.length - 1);
-			client.mainServer.channels.cache.get(welcome).send({ content: '**● ' + answer.replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
-		});
+	const answer = await require('../../utils/helpers/gpt')(`as a Discord user, send a single  short welcome message to a user named "${member.displayName}" who joined a server named "${member.guild.name}", make the message related to the user name.`);
+	client.mainServer.channels.cache.get(welcome).send({ content: '**● ' + answer.slice(1, answer.length - 1).replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
 
 
 	// const messages = await client.staffServer.channels.cache.get(welcome.messages).messages.fetch();

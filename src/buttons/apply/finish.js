@@ -15,6 +15,7 @@ module.exports = {
 			.setAuthor({ name: interaction.user.displayName, url: `https://discord.com/users/${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL() })
 			.setColor(0xffff00);
 		resChannel.send({ embeds: [embed, ...interaction.message.embeds.map(e => e.data)] });
-		interaction.reply({ content: '**📃 - Your application was sent to our staff to review.**', ephemeral: true }).then(msg => setTimeout(() => msg.delete(), 10000));
+		interaction.message.delete();
+		interaction.reply({ content: '**📃 - Your application was sent to our staff to review.**', ephemeral: true });
 	},
 };

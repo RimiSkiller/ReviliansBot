@@ -9,7 +9,6 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		const msg = await (await client.mainServer.channels.fetch('1185352927104204881')).messages.fetch('1185356899860885514');
-		console.log(msg);
+
 	},
 };

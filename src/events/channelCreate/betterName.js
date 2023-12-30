@@ -34,5 +34,5 @@ module.exports = async (client, channel) => {
 			.replace('x', '𝖷')
 			.replace('y', '𝖸')
 			.replace('z', '𝖹') + str.substring(1));
-	channel.setName(`•᲼${newName.join('᲼')}`);
+	channel.setName(`•︱${newName.join('︲')}`);
 };

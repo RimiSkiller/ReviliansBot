@@ -12,7 +12,7 @@ module.exports = async (client, message) => {
 	if (message.author.id == client.user.id) return;
 	if (message.channelId != suggChannel) return;
 	const embed = new EmbedBuilder()
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setAuthor({ name: 'Suggestion' })
 		.setDescription(`**● ${message.content}**\n\n­`)
 		.addFields({ name: '● Staff reply:', value: 'No reply yet' })

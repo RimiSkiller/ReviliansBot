@@ -16,7 +16,7 @@ module.exports = async (client) => {
 		.setDescription(dataShow.join(',\n'))
 		.setThumbnail(channelShow.guild.iconURL())
 		.setFooter({ text: 'Last Updated' })
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setTimestamp(Date.now());
 	const messageShow = await channelShow.messages.fetch();
 	if (messageShow.size == 0) channelShow.send({ embeds: [embed] });

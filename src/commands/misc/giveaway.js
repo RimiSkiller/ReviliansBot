@@ -37,7 +37,7 @@ module.exports = {
 		const prize = interaction.options.get('prize').value;
 		const embed = new EmbedBuilder()
 			.setAuthor({ name: 'Giveaway' })
-			.setColor(0x5865f2)
+			.setColor(client.color)
 			.addFields({ name: '● Prize:', value: prize })
 			.addFields({ name: '● Time:', value: `<t:${Math.floor((time + Date.now()) / 1000)}:R>` })
 			.setFooter({ text: `By: ${interaction.member.displayName}\nWinners: ${winners}`, iconURL: interaction.member.displayAvatarURL() })

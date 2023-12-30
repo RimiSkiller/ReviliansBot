@@ -10,7 +10,7 @@ module.exports = (client, oldMember, newMember) => {
 	if (oldMember.nickname == newMember.nickname) return;
 	const log = client.channels.cache.get(nicknames);
 	const embed = new EmbedBuilder()
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setTimestamp()
 		.setThumbnail()
 		.setThumbnail(client.mainServer.iconURL())

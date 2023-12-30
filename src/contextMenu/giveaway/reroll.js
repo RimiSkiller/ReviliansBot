@@ -20,7 +20,7 @@ module.exports = {
 		message.edit({ embeds: [embed] });
 		const newEmbed = new EmbedBuilder()
 			.addFields(winnerField)
-			.setColor(0x5865f2);
+			.setColor(client.color);
 		interaction.reply({ embeds: [newEmbed] });
 	},
 };

@@ -15,7 +15,7 @@ module.exports = async (client, muteData, timestamp) => {
 
 	const proofEmbed = new EmbedBuilder()
 		.setAuthor({ name: `[${member.username}] Mute #${memberMutes}`, iconURL: member.avatarURL() })
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.addFields(
 			{ name: '● Member:', value: `<@${muteData.member}> (${muteData.member})` },
 			{ name: '● Staff:', value: `<@${muteData.staff}> (${muteData.staff})` },

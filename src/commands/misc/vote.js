@@ -31,7 +31,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setAuthor({ name: interaction.guild.name, iconURL: interaction.guild.iconURL() })
 			.setDescription(`**● ${interaction.options.get('message').value}**`)
-			.setColor('5865f2')
+			.setColor(client.color)
 			.setFooter({ text: `Vote By: ${interaction.member.displayName}`, iconURL: interaction.member.displayAvatarURL() });
 		const msg = await (await interaction.reply({ embeds: [embed] })).fetch();
 		await msg.react('1173758537227309067');

@@ -28,7 +28,7 @@ module.exports = {
 			.setDescription(message.content)
 			.setFooter({ text: 'Revilians Apply System' })
 			.setTimestamp()
-			.setColor(0x5865f2)
+			.setColor(client.color)
 			.setThumbnail(client.mainServer.iconURL());
 
 		const button = new ButtonBuilder({ emoji: '📨', customId: 'apply', label: 'Apply Now!', style: ButtonStyle.Success });

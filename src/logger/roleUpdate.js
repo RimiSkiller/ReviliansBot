@@ -9,7 +9,7 @@ module.exports = (client, oldRole, newRole) => {
 	if (oldRole.name == newRole.name) return;
 	const log = client.channels.cache.get(roles);
 	const embed = new EmbedBuilder()
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setTimestamp()
 		.setThumbnail()
 		.setThumbnail(client.mainServer.iconURL())

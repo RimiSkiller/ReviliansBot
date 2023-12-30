@@ -11,7 +11,7 @@ module.exports = (client, oldMessage, newMessage) => {
 	if (oldMessage.author.id == client.user.id) return;
 	const log = client.channels.cache.get(messageEdited);
 	const embed = new EmbedBuilder()
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setTimestamp()
 		.setThumbnail()
 		.setThumbnail(client.mainServer.iconURL())

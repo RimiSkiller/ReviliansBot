@@ -10,7 +10,7 @@ module.exports = (client, oldChannel, newChannel) => {
 	if (newChannel.name == oldChannel.name) return;
 	const log = client.channels.cache.get(channelCreated);
 	const embed = new EmbedBuilder()
-		.setColor(0x5865f2)
+		.setColor(client.color)
 		.setTimestamp()
 		.setThumbnail()
 		.setThumbnail(client.mainServer.iconURL())

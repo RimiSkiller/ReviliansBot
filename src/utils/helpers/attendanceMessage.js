@@ -14,7 +14,7 @@ module.exports = async (client) => {
 		.setDescription(dataShow.join(',\n') || '## No staff online.')
 		.setThumbnail(channel.guild.iconURL())
 		.setFooter({ text: `Staff Online: ${checks.length}` })
-		.setColor(0x5865f2);
+		.setColor(client.color);
 	const button1 = new ButtonBuilder({ customId: 'check-in', label: 'Check-In', style: ButtonStyle.Success });
 	const button2 = new ButtonBuilder({ customId: 'check-out', label: 'Check-Out', style: ButtonStyle.Secondary });
 	const messages = await channel.messages.fetch();

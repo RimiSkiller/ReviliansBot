@@ -7,28 +7,30 @@ const { welcome } = require('../../../configs/config.json');
  */
 module.exports = async (client, member) => {
 	if (member.guild.id != client.mainServer.id) return;
+	registerFont('files/fonts/Hayah_font.otf', { family: 'Hayah' });
 	const canvas = createCanvas(1920, 1080);
 	const ctx = canvas.getContext('2d');
 
 	await loadImage('files/images/welcome.png').then(image => {
 		ctx.drawImage(image, 0, 0);
 	});
-	registerFont('files/fonts/Gropled_font.otf', { family: 'Gropled' });
-	ctx.font = '108px "Gropled"';
-	ctx.fillStyle = 'white';
+	ctx.font = '128px "Hayah"';
+	ctx.fillStyle = 'rgba(73, 33, 110, 1)';
 	ctx.textAlign = 'center';
-	ctx.fillText(member.displayName, 1350, 540, 1000);
+	ctx.fillText(member.displayName, 1350, 400, 800);
 
-	await loadImage(member.user.displayAvatarURL({ extension: 'png' })).then(image => {
+	await loadImage(member.user.displayAvatarURL({ extension: 'png', size: 512 })).then(image => {
+		ctx.save();
 		ctx.beginPath();
-		ctx.arc(430, 555, 315, 0, Math.PI * 2, true);
+		ctx.arc(540.4, 540.4, 401, 0, Math.PI * 2, true);
 		ctx.closePath();
 		ctx.clip();
-		ctx.drawImage(image, 115, 240, 630, 630);
+		ctx.drawImage(image, 139.4, 139.4, 802, 802);
+		ctx.restore();
 	});
 
-	const answer = await require('../../utils/helpers/gpt')(`as a Discord user, send a single  short welcome message to a user named "${member.displayName}" who joined a server named "${member.guild.name}", make the message related to the user name.`);
-	client.mainServer.channels.cache.get(welcome).send({ content: '**● ' + answer.slice(1, answer.length - 1).replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
+	const answer = await require('../../utils/helpers/gpt')(`a user named "${member.displayName}" joined the server, welcome him with a message related to his name`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${member.guild.name}", you will send me the best message in Arabic to reply to this scenario, users names must be in English.`);
+	client.mainServer.channels.cache.get(welcome).send({ content: '**● ' + answer.replace(member.displayName, `<@${member.id}>`) + '**', files: [canvas.toBuffer()] });
 
 
 	// const messages = await client.staffServer.channels.cache.get(welcome.messages).messages.fetch();

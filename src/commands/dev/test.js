@@ -17,7 +17,7 @@ module.exports = {
 	 * @param {import('discord.js').ChatInputCommandInteraction} interaction
 	 */
 	callback: async (client, interaction) => {
-		await interaction.deferReply();
-		client.emit('guildMemberAdd', await interaction.guild.members.fetch(interaction.options.get('member').value));
+		await interaction.deferReply({ ephemeral: true });
+		client.emit('messageCreate', await interaction.channel.messages.fetch('1192894292155449515'));
 	},
 };

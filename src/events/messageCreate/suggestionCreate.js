@@ -13,7 +13,7 @@ module.exports = async (client, message) => {
 	if (message.channelId != suggChannel) return;
 	const embed = new EmbedBuilder()
 		.setColor(client.color)
-		.setAuthor({ name: 'Suggestion', iconURL: 'https://media.discordapp.net/attachments/1167141932313608214/1193695684856119419/discotools-xyz-icon_11.png?ex=65ada6bd&is=659b31bd&hm=7aabb64e93158f2210487e053253758975b495d5a02dfc219bb2d50cface5457&=&format=webp&quality=lossless&width=497&height=497' })
+		.setAuthor({ name: 'New Idea!', iconURL: 'https://media.discordapp.net/attachments/1167141932313608214/1193695684856119419/discotools-xyz-icon_11.png?ex=65ada6bd&is=659b31bd&hm=7aabb64e93158f2210487e053253758975b495d5a02dfc219bb2d50cface5457&=&format=webp&quality=lossless&width=497&height=497' })
 		.setDescription(`**● ${message.content}**\n\n­`)
 		.addFields({ name: '● Staff reply:', value: 'No reply yet' })
 		.addFields({ name: '● Votes:', value: `**0% <:upVote:1193689532764270623> ${barMaker(0, 0).pb} <:downVote:1193689536191012967> 0%**` })

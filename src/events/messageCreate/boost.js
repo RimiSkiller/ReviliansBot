@@ -10,10 +10,10 @@ module.exports = async (client, message) => {
 	if (![8, 9, 10, 11].includes(message.type)) return;
 	let msg = '';
 	if (message.type == 8) msg = await gpt(`a user named "${message.member.displayName}" boosted the server, thank him in a very short message in Arabic`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${message.member.guild.name}", you will send me the best message in Arabic to reply to this scenario, users names must be in English, don't use more than 1 emoji in the message.`);
-	else msg = await gpt(`a user named "${message.member.displayName}" boosted the server and made it reach level ${message.type - 8}, thank him in a very short message in Arabic`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${message.member.guild.name}", you will send me the best message in Arabic to reply to this scenario, users names must be in English, don't use more than 1 emoji in the message.`);
+	else msg = await gpt(`a user named "${message.member.displayName}" boosted the server and made it reach level ${message.type - 8}, thank him in a very short message in Arabic`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${message.member.guild.name}", you will send me the best message in Arabic to reply to this scenario, users names must be in English, don't use any emoji in the message.`);
 	const embed = new EmbedBuilder({
 		'type': 'rich',
-		'description': '**● ' + msg.replace(message.member.displayName, `<@${message.member.id}>`) + '**',
+		'description': '**● ' + msg.replace(message.member.displayName, `<@${message.member.id}>`) + ' <a:NitroBoost:1193681046827438161>**',
 		'color': 13806328,
 		'footer': {
 			'text': `Server Current Boosts: ${message.guild.premiumSubscriptionCount}`,

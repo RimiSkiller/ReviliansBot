@@ -17,7 +17,6 @@ module.exports = async (client, message) => {
 		'color': 13806328,
 		'footer': {
 			'text': `Server Current Boosts: ${message.guild.premiumSubscriptionCount}`,
-			'icon_url': message.member.avatarURL({ size: 256, extension: 'png' }),
 		},
 		'thumbnail': {
 			'url': message.guild.iconURL({ size: 64, extension: 'png' }),

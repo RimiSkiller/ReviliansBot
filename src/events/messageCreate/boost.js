@@ -15,9 +15,6 @@ module.exports = async (client, message) => {
 		'type': 'rich',
 		'description': '**● ' + msg.replace(message.member.displayName, `<@${message.member.id}>`) + ' <a:NitroBoost:1193681046827438161>**',
 		'color': 13806328,
-		'footer': {
-			'text': `Server Current Boosts: ${message.guild.premiumSubscriptionCount}`,
-		},
 		'thumbnail': {
 			'url': message.guild.iconURL({ size: 64, extension: 'png' }),
 			'width': 64,
@@ -28,6 +25,8 @@ module.exports = async (client, message) => {
 			'icon_url': 'https://message.style/cdn/images/852b5fdbe07776762c94b7e192cac119d6adcbac40476e66da8d5332fb6659be.png',
 			'proxy_icon_url': 'https://images-ext-2.discordapp.net/external/wRL53LjBL3LUTlF6Bn6F180ra5GASKoBseRsFkVTyGY/https/message.style/cdn/images/852b5fdbe07776762c94b7e192cac119d6adcbac40476e66da8d5332fb6659be.png',
 		},
-	});
+	})
+		.setTimestamp()
+		.setFooter({ text: `Server Current Boosts: ${message.guild.premiumSubscriptionCount}`, iconURL: message.member.displayAvatarURL({ size: 64, extension: 'png' }) });
 	message.guild.channels.cache.get(boost).send({ embeds: [embed] });
 };

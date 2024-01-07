@@ -21,11 +21,11 @@ module.exports = async (client, message) => {
 		.setFooter({ text: `Suggested by: ${message.member.displayName}`, iconURL: message.member.displayAvatarURL() });
 	const upButton = new ButtonBuilder()
 		.setCustomId('suggUp')
-		.setEmoji({ id: '1173758537227309067' })
+		.setEmoji({ id: '1193689532764270623' })
 		.setStyle(ButtonStyle.Secondary);
 	const downButton = new ButtonBuilder()
 		.setCustomId('suggDown')
-		.setEmoji({ id: '1173758586816561235' })
+		.setEmoji({ id: '1193689536191012967' })
 		.setStyle(ButtonStyle.Secondary);
 	message.delete().then(() => {
 		message.channel.send({ embeds: [embed], components: [new ActionRowBuilder().addComponents(upButton, downButton)] }).then(async msg => await new Suggs({ message: msg.id, author: message.author.id }).save());

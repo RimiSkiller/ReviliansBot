@@ -34,8 +34,8 @@ module.exports = {
 			.setColor(client.color)
 			.setFooter({ text: `Vote By: ${interaction.member.displayName}`, iconURL: interaction.member.displayAvatarURL() });
 		const msg = await (await interaction.reply({ embeds: [embed] })).fetch();
-		await msg.react('1173758537227309067');
-		await msg.react('1173758586816561235');
+		await msg.react('1193689532764270623');
+		await msg.react('1193689536191012967');
 		if (!time) return;
 		await new Votes({
 			author: interaction.user.id,

@@ -16,7 +16,7 @@ module.exports = async (client, message) => {
 		.setAuthor({ name: 'Suggestion' })
 		.setDescription(`**● ${message.content}**\n\n­`)
 		.addFields({ name: '● Staff reply:', value: 'No reply yet' })
-		.addFields({ name: '● Votes:', value: `**0% <:upvote:1193689532764270623> ${barMaker(0, 0).pb} <:downVote:1193689536191012967> 0%**` })
+		.addFields({ name: '● Votes:', value: `**0% <:upVote:1193689532764270623> ${barMaker(0, 0).pb} <:downVote:1193689536191012967> 0%**` })
 		.setThumbnail(message.guild.iconURL())
 		.setFooter({ text: `Suggested by: ${message.member.displayName}`, iconURL: message.member.displayAvatarURL() });
 	const upButton = new ButtonBuilder()

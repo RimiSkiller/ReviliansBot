@@ -22,7 +22,7 @@ module.exports = {
 		interaction.reply({ content: `**☑️ - Voted for the suggestion: [Suggestion](<${message.url}>)**`, ephemeral: true });
 		const bar = barMaker(upCount, downCount);
 		const embed = EmbedBuilder.from(message.embeds[0]);
-		embed.setFields([embed.data.fields[0], { name: '● Votes:', value: `**${Math.round(bar.uPer)}% <:upvote:1193689532764270623> ${bar.pb} <:downvote:1193689536191012967> ${bar.dPer}%**` }]);
+		embed.setFields([embed.data.fields[0], { name: '● Votes:', value: `**${Math.round(bar.uPer)}% <:upVote:1193689532764270623> ${bar.pb} <:downVote:1193689536191012967> ${bar.dPer}%**` }]);
 		await message.edit({ embeds: [embed] });
 		await data.save();
 	},

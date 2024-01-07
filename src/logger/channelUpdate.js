@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { channelCreated } = require('../../configs/logger.json');
+const { channels } = require('../../configs/logger.json');
 /**
  * @param {import('discord.js').Client} client
  * @param {import('discord.js').Channel} newChannel
@@ -8,7 +8,7 @@ const { channelCreated } = require('../../configs/logger.json');
 module.exports = (client, oldChannel, newChannel) => {
 	if (newChannel.guildId != client.mainServer) return;
 	if (newChannel.name == oldChannel.name) return;
-	const log = client.channels.cache.get(channelCreated);
+	const log = client.channels.cache.get(channels);
 	const embed = new EmbedBuilder()
 		.setColor(client.color)
 		.setTimestamp()

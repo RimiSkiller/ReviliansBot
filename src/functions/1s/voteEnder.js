@@ -9,21 +9,21 @@ module.exports = async (client) => {
 	votes.forEach(async vote => {
 		const channel = await client.channels.fetch(vote.channel, { cache: false });
 		const message = await channel.messages.fetch(vote.message);
-		const upRec = message.reactions.cache.get('1173758537227309067');
-		const downRec = message.reactions.cache.get('1173758586816561235');
+		const upRec = message.reactions.cache.get('1193689532764270623');
+		const downRec = message.reactions.cache.get('1193689536191012967');
 		const upCount = upRec.count - 1;
 		const downCount = downRec.count - 1;
 		const upButton = new ButtonBuilder()
 			.setCustomId('1')
 			.setDisabled(true)
 			.setLabel(upCount.toString())
-			.setEmoji({ id: '1173758537227309067' })
+			.setEmoji({ id: '1193689532764270623' })
 			.setStyle(ButtonStyle.Secondary);
 		const downButton = new ButtonBuilder()
 			.setCustomId('2')
 			.setDisabled(true)
 			.setLabel(downCount.toString())
-			.setEmoji({ id: '1173758586816561235' })
+			.setEmoji({ id: '1193689536191012967' })
 			.setStyle(ButtonStyle.Secondary);
 		message.edit({ components: [new ActionRowBuilder().addComponents(upButton, downButton)] });
 		const upUsers = upCount ? (await upRec.users.fetch()).filter(u => u.id != client.user.id).map(u => `\n${u.username} - (${u.id})`) : 'diff\n- No voters';

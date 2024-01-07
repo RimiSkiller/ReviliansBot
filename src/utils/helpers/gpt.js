@@ -21,7 +21,7 @@ module.exports = async (promote, system) => {
 		},
 	];
 	const res = await openai.chat.completions.create({
-		model: 'gpt-3.5-turbo-16k-0613',
+		model: 'gpt-3.5-turbo',
 		messages: messages,
 	});
 	return res.choices[0].message.content;

@@ -18,6 +18,6 @@ module.exports = {
 		resChannel.send({ embeds: [embed, ...interaction.message.embeds.map(e => e.data)] });
 		interaction.message.delete();
 		interaction.deferReply();
-		interaction.editReply({ content: '**● ' + await gpt(`a user named "${interaction.user.displayName}" finished filling an application in the server, inform him that his application have been submitted to high staff.`, 'I want to act as a Discord bot, I\'ll write you a scenario that may happen in Discord server called "Revilians Community", you will send me the best message in Arabic to reply to this scenario, users names must be in English.') + '**', ephemeral: true });
+		interaction.editReply({ content: '**● ' + await gpt(`a user named "${interaction.user.displayName}" finished filling an application in the server, inform him that his application have been submitted to high staff.`, 'I want to act as a Discord bot, I\'ll write you a scenario that may happen in Discord server called "Revilians Community", you will send me the best message in Arabic to reply to this scenario.') + '**', ephemeral: true });
 	},
 };

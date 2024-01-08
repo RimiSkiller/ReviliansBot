@@ -10,7 +10,7 @@ module.exports = {
 	callback: async (client, interaction) => {
 		const applyType = interaction.message.embeds[0].data.title;
 		const category = (await client.staffServer.channels.fetch()).find(ch => ch.name == applyType);
-		if (!category) return interaction.reply({ content: '**❌ - Some thing went wrong, contact the staff team.**', ephemeral: true });
+		if (!category) return interaction.reply({ content: '**❌ - حدث خطأ ما, يرجى التواصل مع فريق الإدارة.**', ephemeral: true });
 		const applyChannels = category.children.cache.filter(ch => ch.name.startsWith('apply')).sort();
 		const applyChannel = applyChannels.first();
 		const modal = new ModalBuilder()
@@ -32,8 +32,8 @@ module.exports = {
 		});
 		const button = new ButtonBuilder({ customId: 'startApply', label: 'Start Process', style: ButtonStyle.Success });
 		interaction.deferReply({ ephemeral: true });
-		const msg = await interaction.user.send({ content: '**● ' + await gpt(`a user named "${interaction.member.displayName}" want to start filling an application in the server, wishing him good luck and inform him to press the "Start Process" button.`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${interaction.guild.name}", you will send me the best message to reply to this scenario.`) + '**', components: [new ActionRowBuilder().addComponents(button)] }).catch(() => interaction.reply({ content: '**🤔 - Open your DM to start the apply.**', ephemeral: true }));
-		interaction.editReply({ content: `**☑️ - You started a new appling process, [continue](<${msg.url}>)**`, ephemeral: true });
+		const msg = await interaction.user.send({ content: '**● ' + await gpt(`a user named "${interaction.member.displayName}" want to start filling an application in the server, wishing him good luck and inform him to press the "Start Process" button.`, `I want you to act as a Discord bot, I'll write you a scenario that may happen in Discord server called "${interaction.guild.name}", you will send me the best message in Arabic to reply to this scenario, users names must be in English.`) + '**', components: [new ActionRowBuilder().addComponents(button)] }).catch(() => interaction.reply({ content: '**🤔 - يرجى فتح الخاص لتتمكن من التقديم.**', ephemeral: true }));
+		interaction.editReply({ content: `**☑️ - لقد بدأت عملية تقديم جديدة, [المتابعة](<${msg.url}>)**`, ephemeral: true });
 		const inter = await msg.awaitMessageComponent({ filter: m => m.user.id == interaction.user.id, componentType: ComponentType.Button, time: 180000, errors: ['time'] }).catch(() => msg.delete());
 		if (inter.isButton) {
 			inter.showModal(modal);
@@ -43,14 +43,14 @@ module.exports = {
 					.setTitle(`${applyType} #1`)
 					.setFields(fields)
 					.setColor(client.color);
-				const bar = require('../../utils/helpers/barMaker')(1, applyChannels.size - 1);
+				const bar = require('../../utils/helpers/barMaker')(1, applyChannels.size - 1, applyChannels.size);
 				if (applyChannels.size > 1) {
 					const button1 = new ButtonBuilder({ emoji: '📩', customId: 'apply-followUp', label: 'Continue', style: ButtonStyle.Primary });
-					msg.edit({ content: `**● <@${interaction.user.id}>, Continue if the information is correct.\n● You can ignore this message and start over.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
+					msg.edit({ content: `**● <@${interaction.user.id}>, الرجاء الإكمال في حال كانت المعلومات المدخلة صحيحة.\n● يمكن تجاهل هذه الرسالة و البدء من جديد.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
 				}
 				else {
 					const button1 = new ButtonBuilder({ emoji: '📨', customId: 'apply-finish', label: 'Finish', style: ButtonStyle.Primary });
-					msg.edit({ content: `**● <@${interaction.user.id}>, Finish if the information is correct.\n● You can ignore this message and start over.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
+					msg.edit({ content: `**● <@${interaction.user.id}>, الرجاء الإنهاء في حال كانت المعلومات المدخلة صحيحة.\n● يمكن تجاهل هذه الرسالة و البدء من جديد.**`, embeds: [embed, new EmbedBuilder().setDescription(`${bar.pb} **1/${applyChannels.size}**`).setColor(client.color)], components: [new ActionRowBuilder().addComponents(button1)], ephemeral: true });
 				}
 				collected.deferUpdate();
 			});

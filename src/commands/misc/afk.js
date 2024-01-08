@@ -22,7 +22,7 @@ module.exports = {
 		const msg = interaction.options.get('message')?.value || null;
 		const attend = await Attend.findOne({ staff: interaction.user.id });
 		if (!attend?.online) return interaction.reply({ content: '**🤔 - You must be checked-in to AFK.**', ephemeral: true });
-		if (!attend || attend.afkStart) return interaction.reply({ content: '**🤔 - You are AFKing.**', ephemeral: true });
+		if (!attend || attend.afkStart) return interaction.reply({ content: '**🤔 - You are already AFKing.**', ephemeral: true });
 		attend.afkStart = Math.floor(Date.now() / 1000);
 		attend.afkMessage = msg;
 		interaction.reply({ content: '**😴 - You\'re AFKing now...**', ephemeral: true });

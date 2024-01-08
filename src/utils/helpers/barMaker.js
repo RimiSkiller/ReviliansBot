@@ -7,9 +7,8 @@ const pb = {
 	rf: '<:RightF:1193684838205636659>',
 };
 
-module.exports = (upvotes = 0, downvotes = 0) => {
+module.exports = (upvotes = 0, downvotes = 0, progressBarLength = 12) => {
 	const totalVotes = upvotes + downvotes;
-	const progressBarLength = 12;
 	const filledSquares = Math.round((upvotes / totalVotes) * progressBarLength) || 0;
 	let emptySquares = progressBarLength - filledSquares || 0;
 

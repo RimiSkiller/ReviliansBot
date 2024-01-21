@@ -7,6 +7,7 @@ const { ChannelType } = require('discord.js');
 module.exports = async (client, channel) => {
 	if (channel.type != ChannelType.GuildText) return;
 	if (channel.guildId != client.mainServer.id) return;
+	if (channel.name.startsWith('ticket-')) return;
 	const newName = channel.name.split('-')
 		.map(str => str[0].replace('a', '𝖠')
 			.replace('b', '𝖡')

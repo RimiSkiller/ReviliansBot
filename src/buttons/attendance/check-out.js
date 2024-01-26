@@ -27,6 +27,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setDescription(`**🔴 - <@${interaction.user.id}> checked-out at <t:${Math.floor(Date.now() / 1000)}>**`)
 			.setColor(0xff0000);
+		interaction.member.roles.remove('1200477671071698944');
 		client.channels.cache.get(log).send({ embeds: [embed] });
 		if (interaction.guild == null) interaction.message.delete();
 		require('../../utils/helpers/attendanceMessage')(client);

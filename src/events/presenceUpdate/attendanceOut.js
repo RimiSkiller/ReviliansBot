@@ -31,6 +31,7 @@ module.exports = async (client, oldPresence, newPresence) => {
 	await check.save();
 	msg.edit({ content: `**🔴 - You've been checked-out. You were online for \`${ms(period * 1000, { long: true })}\`${afkTime ? `, Removed \`${ms(afkTime * 1000, { long: true })}\` for AFKing.` : '.'}**`, components: [] });
 	require('../../utils/helpers/attendanceMessage')(client);
+	member.roles.remove('1200477671071698944');
 	const embed = new EmbedBuilder()
 		.setDescription(`**🔴 - <@${member.id}> checked-out at <t:${Math.floor(Date.now() / 1000) - 300}>. __(not online)__**`)
 		.setColor(0xff0000);

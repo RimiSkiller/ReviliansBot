@@ -13,9 +13,9 @@ module.exports = {
 		const user = interaction.message.mentions.users.first();
 		const embed = EmbedBuilder.from(interaction.message.embeds[0]).setColor(0x00ff00).setImage('attachment://proof.png');
 		const data = await Points.findOne({ staff: user.id }) || new Points({ staff: user.id });
-		data.points++;
+		data.points += 3;
 		await data.save();
-		client.channels.cache.get(log).send({ embeds: [new EmbedBuilder().setDescription(`- **Added a point for staff <@${user.id}> for registering a proof.**`).setColor(0x00ff00)] });
+		client.channels.cache.get(log).send({ embeds: [new EmbedBuilder().setDescription(`- **Added \`3\` point for staff <@${user.id}> for registering a proof.**`).setColor(0x00ff00)] });
 		interaction.message.edit({ embeds: [embed], components: [] });
 		interaction.deferUpdate();
 		require('../../utils/helpers/pointMessage')(client);

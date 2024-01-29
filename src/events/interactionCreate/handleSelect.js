@@ -8,7 +8,7 @@ const getLocalInteractions = require('../../utils/getFiles/getLocalInteractions'
 module.exports = async (client, interaction) => {
 	if (!interaction.isAnySelectMenu()) return;
 
-	const localCommands = getLocalInteractions('selectMenu');
+	const localCommands = getLocalInteractions('../selectMenu');
 
 	try {
 		const commandObject = localCommands.find(
